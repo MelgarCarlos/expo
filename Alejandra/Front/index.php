@@ -22,15 +22,40 @@ session_start();
             </center>
             <div class="bg-grayLighter" style="overflow: hidden;">
                 <div class="carousel place-left" data-role="carousel" data-height="380px" data-width="100%" data-controls="false" data-period="3000">
+                    <?php
+                    $path='../img/slide/.';
+                    $dir = opendir($path);
+                    $files = array();
+                    while ($current = readdir($dir)){
+                        if( $current != "." && $current != "..") {
+                            if(is_dir($path.$current)) {
+                                showFiles($path.$current.'/');
+                            }
+                            else {
+                                $files[] = $current;
+                            }
+                        }
+                    }
+                    if(count( $files )>0){
+                    for($i=0; $i<count( $files ); $i++){
+                        ?>
+                   <     <div class="slide">
+                        <img src="../img/slide/<?=$files[$i]?>" data-role="fitImage" data-format="fill">
+                        </div>
+                    <?php
+                    }
+                    }else{
+                    ?>
                     <div class="slide">
-                        <img src="../img/slide/img1_slide.png" data-role="fitImage" data-format="fill">
+                        <img src="../img/aux_slide/img_slide_1.png" data-role="fitImage" data-format="fill">
                     </div>
-                    <div class="slide">
-                        <img src="../img/slide/img2_slide.png"  data-role="fitImage" data-format="fill">
+                   <div class="slide">
+                        <img src="../img/aux_slide/img_slide_2.png" data-role="fitImage" data-format="fill">
                     </div>
-                    <div class="slide">
-                        <img src="../img/slide/img3_slide.png"  data-role="fitImage" data-format="fill">
+                   <div class="slide">
+                        <img src="../img/aux_slide/img_slide_3.png" data-role="fitImage" data-format="fill">
                     </div>
+                        <?php } ?>
                 </div>
                 <div class="place-right" style="width: 100%;padding-bottom: 2%;">
                     <div style="padding: 1% 2% 0 2%;line-height: 18px;">
