@@ -52,20 +52,27 @@ if(!verificar_usuario()){
 		if($_POST["tipo_sl"]=='Administrador')
 		{
 			$valor=1;
-		} else if($_POST["tipo_sl"]=='Profesor')
+		} else if($_POST["tipo_sl"]=='Empleado')
 		{
 			$valor=2;
-		} else if($_POST["tipo_sl"]=='Estudiante')
+		} else if($_POST["tipo_sl"]=='Cliente')
 		{
 			$valor=3;
 		}
 		$usua=$_POST["usuario_txt"];
 		$name=$_POST["nombre_txt"];
 		$password=$_POST["contrasenia_txt"];
-		$consulta="INSERT INTO usuario(usuario, nombre, contrasena, tipo) VALUES('".$usua."','".$name."',AES_ENCRYPT('text','.".$password.".'),".$valor.")";
+                $password2=$_POST["contrasenia2_txt"];
+                $mensaje="";
+                if(strcmp($password, $password2)==0){
+                    $consulta="INSERT INTO usuario(usuario, nombre, contrasena, tipo) VALUES('".$usua."','".$name."',AES_ENCRYPT('text','.".$password.".'),".$valor.")";
 		if(mysql_query($consulta,$conexion)){
                     $guardaru=true;
                 }
+                }else{
+                    $mensaje=": Las contraseñas no coinciden";
+                }
+                
 	}
 ?>
             <?php
@@ -86,7 +93,7 @@ if(!verificar_usuario()){
     <script>
             $(document).ready(function() {
                 setTimeout(function(){
-                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Error al guardar"});
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Error al guardar<?=$mensaje?>"});
                 }, 150);
             });
     </script>
@@ -160,8 +167,8 @@ if(!verificar_usuario()){
                     <select  name="tipo_sl" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
                         <option value="">Seleccione una opción</option>
                         <option value="Administrador">Administrador</option>
-                        <option value="Profesor">Profesor</option>
-                        <option value="Estudiante">Estudiante</option>
+                        <option value="Empleado">Profesor</option>
+                        <option value="Cliente">Estudiante</option>
                     </select>
                     <span class="mif-arrow-down prepend-icon"></span>
                     <span class="input-state-error mif-warning"></span>
