@@ -13,12 +13,11 @@ if(!verificar_usuario()){
     ?>
     <title>Agregar usuario</title>
 </head>
-<body style="background-color: #fffff9;">
-    
+<body style="background-color: #fffff9;">¿
     <?php
     include 'nav.php';
     ?>
-    
+    <!----Validacion de contraseñas--->
     <script>
     var validacion = false;
 	function myFunction() {
