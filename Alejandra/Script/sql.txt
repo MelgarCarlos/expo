@@ -1,0 +1,98 @@
+create database expo;
+
+create table usuario(
+usuario varchar(40) primary key,
+nombre varchar(100) not null,
+contrasena varchar(30),
+tipo smallint(1)
+)engine=innoDB;
+
+create table preguntas(
+id int primary key not null,
+pregunta varchar(100)
+)engine=innoDB;
+
+create table usuario_info(
+usuario varchar(40),
+nombre varchar(100),
+apellido varchar(100),
+correo varchar(100),
+pregunta int,
+respuesta varchar(200),
+foreign key (usuario) references usuario(usuario),
+foreign key (pregunta) references preguntas(id),
+unique key (usuario)
+);
+
+create table servicios(
+id varchar(4) primary key,
+titulo varchar(30) not null,
+descripcion varchar(300) not null,
+icono varchar(30)
+)
+
+create table iconos(
+nombre varchar(40),
+codigo varchar(30)
+)
+insert into iconos values ('broadcast','mif-broadcast'),('versions','mif-versions'),('lamp','mif-lamp'),('file-movie','mif-file-movie'),('location-city','mif-location-city'),('money','mif-money'),('looks','mif-looks'),('pencil','mif-pencil'),('images','mif-images'),('film','mif-film'),('file-empty','mif-file-empty'),('file-music','mif-file-music'),('stack','mif-stack'),('folder','mif-folder'),('tags','mif-tags'),('credit-card','mif-credit-card'),('wrench','mif-wrench'),('cogs','mif-cogs'),('gamepad','mif-gamepad'),('gamepad','mif-gamepad'),('dollars','mif-dollars'),('file-image','mif-file-image'),('file-code','mif-file-code'),('contacts-mail','mif-contacts-mail'),('camera','mif-camera'),('database','mif-database'),('clipboard','mif-clipboard'),('embed2','mif-embed2'),('layers','mif-layers')
+
+create table producto(
+producto varchar(20) primary key,
+nombre varchar(10),
+precio float
+)
+
+
+
+
+
+
+<?php
+    
+$dir_subida = '../img/';
+$fichero_subido = $dir_subida . basename($_FILES['img']['name']);
+
+echo '<pre>';
+if (move_uploaded_file($_FILES['img']['tmp_name'], $fichero_subido)) {
+    echo "El fichero es válido y se subió con éxito.\n";
+} else {
+    echo "¡Posible ataque de subida de ficheros!\n";
+}
+
+echo 'Más información de depuración:';
+print_r($_FILES);
+
+print "</pre>";
+
+?>
+    <form style="padding-top: 10%;" method="post" action="promocion.php" enctype="multipart/form-data">
+        <div class="input-control file" data-role="input">
+            <input type="file" name="img" accept="image/png">
+            <button class="button"><span class="mif-folder"></span></button>
+        </div>
+        <button name="sub" class="button">Submit</button>
+    </form>
+
+
+
+
+
+<div class="input-control select">
+                            <select id="select_icon" onchange="onChange()">
+                                <option value="mif-dollar2">Opcion 1</option>
+                                <option value="mif-lamp">Opcion 1</option>
+                        </select>
+                        </div>
+                        <div>
+                            <span id="icono_select" class=""></span>
+                        </div>
+                        <script>
+                            function onChange(){
+                            var s=document.getElementById("select_icon");
+                            var span=document.getElementById("icono_select");
+                            span.setAttribute("class","");
+                            span.setAttribute("class",s.value);
+                            alert(s.value);
+                            }
+                        </script>
