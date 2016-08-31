@@ -2,7 +2,6 @@ create database expo;
 
 create table usuario(
 usuario varchar(40) primary key,
-nombre varchar(100) not null,
 contrasena varchar(30),
 tipo smallint(1)
 )engine=innoDB;

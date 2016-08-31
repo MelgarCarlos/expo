@@ -22,8 +22,10 @@ if(!verificar_usuario()){
     <script>
     var validacion = false;
 	function myFunction() {
+            var elemento = document.querySelector('#Pass2');
     var PS1 = document.getElementById("Pass1").value;
     var PS2 = document.getElementById("Pass2").value;
+    elemento.setAttribute("data-validate-arg", "["+PS1+"]");
     if (PS1 != PS2) {
         document.getElementById("Pass1").style.borderColor = "#E34234";
         document.getElementById("Pass2").style.borderColor = "#E34234";
@@ -34,8 +36,7 @@ if(!verificar_usuario()){
         document.getElementById("Pass2").style.borderColor = "#0CDE01";
 		validacion = true;
     }
-    var elemento = document.querySelector('#Pass2');
-    elemento.setAttribute("data-validate-arg", "["+PS1+"]");
+    
     }
     
     </script>
@@ -128,7 +129,7 @@ if(!verificar_usuario()){
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="nombre_txt" type="text" data-validate-func="required" placeholder="Nombre" data-validate-hint="Llene el campo usuario">
+                    <input name="nombre_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -137,7 +138,7 @@ if(!verificar_usuario()){
                 <label> Usuario</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="usuario_txt" type="text" data-validate-func="required" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
+                    <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -147,7 +148,7 @@ if(!verificar_usuario()){
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia_txt" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="required" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña" maxlength="40">
+                    <input name="contrasenia_txt" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -156,7 +157,7 @@ if(!verificar_usuario()){
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia2_txt" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="40">
+                    <input name="contrasenia2_txt" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
