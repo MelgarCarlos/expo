@@ -118,26 +118,35 @@ if(!verificar_usuario()){
                 <label> Icono</label>
                 <br>
                 <div class="input-control select" style="width:100%;">
-                    <select  name="comboicono" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
-                        <?php
-                        $link =mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");
-                        mysql_select_db("expo") or die("No se pudo seleccionar la base de datos");
-                        $consulta="SELECT * FROM iconos";
-                        if(mysql_query($consulta,$link))
-                        {
-                        while($renglon = mysql_fetch_array($resultado))
-                        {
-                        $valor=$renglon['Columna'];
-                        echo "<option value=".$row['nombre'].">".$row['codigo']."</option>\n";
-                        }
-                        }
-                        mysql_close($link);
-                        ?>
+                    <select id="select_icon" onchange="onChange()"  name="comboicono" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
+                        <option value="">Seleccione una opcion</option>                
+                        <?php 
+                                $db = mysql_connect("localhost", "root", "") or die ("No conecto con el servidor");
+                                    mysql_select_db("expo") or die ("No se pudo seleccionar la base de datos");
+                                    $sql="select * from iconos";
+                                    $consulta=mysql_query($sql,$db) or die ("error ".mysql_error());
+                                    $numRegistros=mysql_num_rows($consulta);
+                                    if($numRegistros>0) {
+                            while($resultado=mysql_fetch_array($consulta)){
+                            ?>
+                        <option value="<?=$resultado[1]?>"><?=$resultado[0]?></option>
+                            <?php }}?>
                     </select>
                     <span class="mif-arrow-down prepend-icon"></span>
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
+                <div>
+                    <span id="icono_select" class="" style="padding: 20px;"></span>
+                </div>
+                <script>
+                            function onChange(){
+                            var s=document.getElementById("select_icon");
+                            var span=document.getElementById("icono_select");
+                            span.setAttribute("class","");
+                            span.setAttribute("class",s.value+" mif-3x");
+                            }
+                        </script>
             </div>  
             <div style="padding: 1% 30% 1% 30%;">
                 <button name="enviar_btn" class="button success block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Guardar</button>
