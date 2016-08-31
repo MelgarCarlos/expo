@@ -2,7 +2,6 @@ create database expo;
 
 create table usuario(
 usuario varchar(40) primary key,
-nombre varchar(100) not null,
 contrasena varchar(30),
 tipo smallint(1)
 )engine=innoDB;
@@ -25,7 +24,7 @@ unique key (usuario)
 );
 
 create table servicios(
-id varchar(4) primary key,
+id int primary key,
 titulo varchar(30) not null,
 descripcion varchar(300) not null,
 icono varchar(30)
@@ -42,8 +41,6 @@ producto varchar(20) primary key,
 nombre varchar(10),
 precio float
 )
-
-
 
 
 
