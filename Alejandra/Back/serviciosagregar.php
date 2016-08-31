@@ -31,8 +31,10 @@ if(!verificar_usuario()){
 	{ 
                 $guardaru=FALSE;
 		$id=$_POST["id_txt"];
-		$pre=$_POST["pregunta_txt"];
-		$consulta="INSERT INTO preguntas VALUES('".$id."','".$pre."')";
+		$ti=$_POST["titulo_txt"];
+                $des=$_POST["descripcion_txt"];
+                $ico=$_POST["comboicono"];
+		$consulta="INSERT INTO servicios VALUES('".$id."','".$ti."','".$des."','".$ico."')";
 		if(mysql_query($consulta,$conexion)){
                     $guardaru=true;
                 }
@@ -91,7 +93,7 @@ if(!verificar_usuario()){
                 <label> Id</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="id_txt" type="text" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id de pregunta(solo numeros)">
+                    <input name="id_txt" type="text" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id del servicio(solo numeros)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -100,7 +102,7 @@ if(!verificar_usuario()){
                 <label>Titulo</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="id_txt" type="text" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id de pregunta(solo numeros)">
+                    <input name="titulo_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -109,7 +111,7 @@ if(!verificar_usuario()){
                 <label> Descripción</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="pregunta_txt" type="text" data-validate-func="pattern" data-validate-arg="[a-zA-Z]+" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
+                    <input name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
