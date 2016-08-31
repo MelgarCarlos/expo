@@ -24,7 +24,7 @@ unique key (usuario)
 );
 
 create table servicios(
-id int primary key,
+id varchar(4) primary key,
 titulo varchar(30) not null,
 descripcion varchar(300) not null,
 icono varchar(30)
@@ -41,6 +41,8 @@ producto varchar(20) primary key,
 nombre varchar(10),
 precio float
 )
+
+
 
 
 
