@@ -13,14 +13,8 @@ if(!verificar_usuario()){
     ?>
     <title>Agregar servicio</title>
 </head>
-<body style="background-color: #fffff9;">
-    
-    <?php
-    include 'nav.php';
-    ?>
-    
-    
-    <div style="padding: 4% 0% 0% 0%;" >
+<body style="background-color: #fffff9;">    
+    <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
 	$conexion=mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");
@@ -85,7 +79,7 @@ if(!verificar_usuario()){
     </table>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-darkGray fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar servicio</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar servicio</h4>
         </center>
         </div>
     <form action="serviciosagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
@@ -117,7 +111,7 @@ if(!verificar_usuario()){
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Icono</label>
+                <label>Icono - <a class="fg-cobalt" href="iconos.php" target="_black">Ver todos</a></label>
                 <br>
                 <div class="input-control select" style="width:100%;">
                     <select id="select_icon" onchange="onChange()"  name="comboicono" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
