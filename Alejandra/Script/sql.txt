@@ -45,6 +45,8 @@ precio float
 
 
 
+
+
 <?php
     
 $dir_subida = '../img/';
@@ -70,26 +72,3 @@ print "</pre>";
         </div>
         <button name="sub" class="button">Submit</button>
     </form>
-
-
-
-
-
-<div class="input-control select">
-                            <select id="select_icon" onchange="onChange()">
-                                <option value="mif-dollar2">Opcion 1</option>
-                                <option value="mif-lamp">Opcion 1</option>
-                        </select>
-                        </div>
-                        <div>
-                            <span id="icono_select" class=""></span>
-                        </div>
-                        <script>
-                            function onChange(){
-                            var s=document.getElementById("select_icon");
-                            var span=document.getElementById("icono_select");
-                            span.setAttribute("class","");
-                            span.setAttribute("class",s.value);
-                            alert(s.value);
-                            }
-                        </script>
