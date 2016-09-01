@@ -14,13 +14,7 @@ if(!verificar_usuario()){
     <title>Agregar pregunta</title>
 </head>
 <body style="background-color: #fffff9;">
-    
-    <?php
-    include 'nav.php';
-    ?>
-    
-    
-    <div style="padding: 4% 0% 0% 0%;" >
+    <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
 	$conexion=mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");

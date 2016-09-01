@@ -13,10 +13,7 @@ if(!verificar_usuario()){
     ?>
     <title>Agregar usuario</title>
 </head>
-<body style="background-color: #fffff9;">¿
-    <?php
-    include 'nav.php';
-    ?>
+<body style="background-color: #fffff9;">
     <!----Validacion de contraseñas--->
     <script>
     var validacion = false;
@@ -39,7 +36,7 @@ if(!verificar_usuario()){
     }
     
     </script>
-    <div style="padding: 4% 0% 0% 0%;" >
+    <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
 	$conexion=mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");
@@ -120,7 +117,7 @@ if(!verificar_usuario()){
     </table>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-darkGray fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar usuario</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar usuario</h4>
         </center>
         </div>
         <form action="usuarioagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">

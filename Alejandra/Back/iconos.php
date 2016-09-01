@@ -11,37 +11,40 @@ if(!verificar_usuario()){
     <?php
     include 'librerias.php';
     ?>
-    <title>Agregar usuario</title>
+    <title>Iconos</title>
 </head>
 <body style="background-color: #fffff9;">¿
     <?php
     include 'nav.php';
     ?>
     <div style="padding: 5% 5% 5% 5%;">
-    <table class="dataTable border bordered hovered cell-hovered" data-role="datatable" data-searching="true">
+        <div class="bg-grayLighter" style="margin: 0px;">
+        <center>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de iconos</h4>
+        </center>
+        </div>
+    <table class="dataTable border bordered hovered" data-role="datatable" data-searching="true">
                 <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Prueba</th>
+                    <th>Icono</th>
                 </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                                $db = mysql_connect("localhost", "root", "") or die ("No conecto con el servidor");
+                                    mysql_select_db("expo") or die ("No se pudo seleccionar la base de datos");
+                                    $sql="select * from iconos";
+                                    $consulta=mysql_query($sql,$db) or die ("error ".mysql_error());
+                                    $numRegistros=mysql_num_rows($consulta);
+                                    if($numRegistros>0) {
+                            while($row=mysql_fetch_array($consulta)){
+                            ?>
                 <tr>
-                    <td>Mi primera prueba</td>
-                    <td>Resultado de prueba uno</td>
-                    <td>Tercera columna primera prueba</td>
+                    <td><?=$row[0]?></td>
+                    <td><span style="padding-bottom: 5px;" class="<?=$row[1]?> mif-2x" ></span></td>
                 </tr>
-                <tr>
-                    <td>Mi segunda prueba</td>
-                    <td>Resultado de prueba dos</td>
-                    <td>Tercera columna segunda prueba</td>
-                </tr>
-                <tr>
-                    <td>Mi tercera prueba</td>
-                    <td>Resultado de prueba tres</td>
-                    <td>Tercera columna tercera prueba</td>
-                </tr>
+                    <?php }} ?>
                 </tbody>
             </table>
         </div>

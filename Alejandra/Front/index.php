@@ -61,14 +61,13 @@ session_start();
                     <div style="padding: 1% 2% 0 2%;line-height: 18px;">
                         <h2>EL EQUIPAMIENTO MÁS COMPLETO</h2>
                         <p class="align-justify" style="margin: 0;padding: 0;">
-                Una actitud de vanguardia reflejada en cada detalle. Aulas de diseño provistas con el software y el hardware de última generación. En Trazos encontrarás lo más puntero en tecnología audiovisual, así como un plató para fotografía y cine digital. Ponemos a tu disposición toda la potencia del medio digital para que lo único que necesites sea una gran idea
+                Estamos comprometidos a ofrecer siempre lo mejor a buen precio,  calidad, rapidez, precios competitivos y atención personalizada, además brindarles  asesoría en cuanto a lo que usted necesita. Sabemos que el mercado demanda de muchos productos innovadores, por lo que nosotros nos sujetamos a esas demandas, ofreciéndole herramientas publicitarias  para promover su empresa o institución.
                         </p>
-                        
                     </div>
                 </div>
             </div>
         </div>
-        <div class="grid condensed demo-grid" style="margin-top: 5%;">
+        <div class="grid" style="margin-top: 5%;">
                 <div class="row cells3">
                     <div class="cell align-center padding10">
                         <div>
@@ -98,6 +97,9 @@ session_start();
                         </p>
                     </div>
                 </div>
+            <div class="align-center">
+                <a href="" class="button bg-darkOrange fg-white"><span class="icon mif-info" style="padding-bottom: 2px;"></span> Ver mas...</a>
+            </div>
         </div>
     </div>
     <?php

@@ -14,11 +14,7 @@ if(!verificar_usuario()){
     <title>Agregar imagen</title>
 </head>
 <body style="background-color: #fffff9;">
-    
-    <?php
-    include 'nav.php';
-    ?>
-    <div style="padding: 4% 0% 0% 0%;" >
+    <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
         
@@ -91,15 +87,15 @@ if(!verificar_usuario()){
     </table>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-darkGray fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar imagen a slider</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-file-image" ></span> Agregar imagen a slider</h4>
         </center>
         </div>
     <form method="post" action="slideragregar.php" enctype="multipart/form-data">
-        <div style="padding: 1% 30% 1% 30%;">
+        <div style="padding: 5% 30% 1% 30%;alignment-adjust: central;">
             <label> Imagen por agregar:</label>
             <br><br>
             <div class="input-control file" data-role="input" style="width: 100%;">
-                <input type="file" name="img" accept="image/png">
+                <input type="file" name="img" accept="image/png" required="">
                 <button class="button"><span class="mif-folder"></span></button>
             </div>
         </div>

@@ -1,5 +1,5 @@
     <div class="app-bar bg-darkCyan fixed-top" data-role="appbar" style="padding-right: 12%;;">
-        <div class="app-bar-element">Sistema Conductual</div>
+        <div class="app-bar-element">Trazos Digitales</div>
         <div class="app-bar-divider"></div>
         
         <ul class="app-bar-menu">
