@@ -94,7 +94,7 @@ include '../login/tiempo.php';
                 <label> Pregunta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="pregunta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
+                    <input name="pregunta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ñ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>

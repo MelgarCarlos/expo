@@ -2,6 +2,7 @@
     <li class="title" style="line-height: 28px;text-align: center;">Panel administrativo</li>
     <hr>
     <li class="stick bg-blue"><a href="admin.php"><span class="mif-home icon fg-blue" ></span> Inicio</a></li>
+    <li class="stick bg-taupe"><a href="../Front/index.php" target="_blank"><span class="mif-earth icon fg-taupe" ></span> Pagina publica</a></li>
     <?php if($_SESSION['tipo']==1){ ?>
     <li class="stick bg-orange">
         <a class="dropdown-toggle" href="#"><span class="mif-users icon fg-orange"></span> Usuarios</a>

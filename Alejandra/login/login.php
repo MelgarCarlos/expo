@@ -9,7 +9,7 @@
 		    $resultado=mysql_fetch_array($consulta);
 		    $numRegistros=mysql_num_rows($consulta);
 		    if($numRegistros==0) {
-		        header("location: ../Front/login.php?".base64_encode($_POST['user_login'])."?".base64_encode("v=0"));
+		        header("location: ../Front/login.php?".base64_encode($_POST['user_login'])."?".base64_encode("0"));
 		    }else if($numRegistros==1){
                         session_start();
                         $_SESSION['tipo']=$resultado['tipo'];

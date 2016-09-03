@@ -18,7 +18,6 @@ session_start();
     }
     
     $url= $_SERVER["REQUEST_URI"];
-    $var=-1;
     $cont=0;
     $user="";
     for($i=0;$i<strlen($url);$i++){ 
@@ -29,15 +28,14 @@ session_start();
     if($cont==1 && $url[$i]!='?'){
             $user=$user.$url[$i];
         }
-    if($cont>1&& $url[$i]!='?'){
-            $var=count($url)-1;
+    if($cont>1 && $url[$i]!='?'){
+            $var=$var.$url[$i];
         }
     }
-    echo $var;
-    if(empty($var)){
+    if(!empty($var)){
         $var=intval(base64_decode($var));
     }else {
-    $var=-1;    
+        $var=-1;
     }
     $user=base64_decode($user);
     if(0==$var){
@@ -46,6 +44,17 @@ session_start();
             $(document).ready(function() {
                 setTimeout(function(){
                     $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Usuario o contraseña incorrectas"});
+                }, 150);
+            });
+    </script>
+    <?php
+    }
+    if(2==$var){
+    ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Se cerro la cuenta por inactividad"});
                 }, 150);
             });
     </script>

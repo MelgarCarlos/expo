@@ -18,7 +18,7 @@ include '../login/tiempo.php';
     <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
-        
+        $count=0;
 	if (isset($_POST["enviar_btn"]))
 	{ 
             $path='../img/slide/.';
@@ -28,6 +28,7 @@ include '../login/tiempo.php';
                 if( $current != "." && $current != "..") {
                     if(is_dir($path.$current)) {
                         showFiles($path.$current.'/');
+                        $count++;
                     }
                     else {
                         $files[] = $current;
@@ -43,6 +44,18 @@ include '../login/tiempo.php';
             $guardaru=false;
         }
 	}
+        $path='../img/slide/.';
+            $dir = opendir($path);
+            while ($current = readdir($dir)){
+                if( $current != "." && $current != "..") {
+                    if(is_dir($path.$current)) {
+                        showFiles($path.$current.'/');
+                    }
+                    else {
+                        $count++;
+                    }
+                }
+            }
 ?>
             <?php
     if(isset($_POST["enviar_btn"])){
@@ -91,6 +104,7 @@ include '../login/tiempo.php';
             <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-file-image" ></span> Agregar imagen a slider</h4>
         </center>
         </div>
+    <?php if($count<5){ ?>
     <form method="post" action="slideragregar.php" enctype="multipart/form-data">
         <div style="padding: 5% 30% 1% 30%;alignment-adjust: central;">
             <label> Imagen por agregar:</label>
@@ -104,6 +118,9 @@ include '../login/tiempo.php';
             <button name="enviar_btn" class="button success block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Guardar</button>
         </div>
     </form>
+    <?php }else{ ?>
+    <h3>Se alcanzo el limite de imagenes para el slider</h3>
+    <?php }?>
     </div>
     </div>
     <?php
