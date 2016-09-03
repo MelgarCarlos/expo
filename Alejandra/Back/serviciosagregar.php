@@ -17,10 +17,9 @@ if(!verificar_usuario()){
     <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
-	$conexion=mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");
+        include '../login/conexion.php';
 	$valor=1;
         $guardaru=null;
-	mysql_select_db("expo") or die("No se pudo seleccionar la base de datos");
 	if (isset($_POST["enviar_btn"]))
 	{ 
                 $guardaru=FALSE;
@@ -101,11 +100,11 @@ if(!verificar_usuario()){
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
             </div>
-            <div style="padding: 1% 30% 1% 30%;">
-                <label> Descripción</label>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Descripcion</label>
                 <br>
-                <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)">
+                <div style="width: 100%;" class="input-control textarea" data-role="input" >
+                    <textarea style="resize:none;" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ,.ñ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)"></textarea>
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -117,12 +116,11 @@ if(!verificar_usuario()){
                     <select id="select_icon" onchange="onChange()"  name="comboicono" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
                         <option value="">Seleccione una opcion</option>                
                         <?php 
-                                $db = mysql_connect("localhost", "root", "") or die ("No conecto con el servidor");
-                                    mysql_select_db("expo") or die ("No se pudo seleccionar la base de datos");
-                                    $sql="select * from iconos";
-                                    $consulta=mysql_query($sql,$db) or die ("error ".mysql_error());
-                                    $numRegistros=mysql_num_rows($consulta);
-                                    if($numRegistros>0) {
+                        include '../login/conexion.php';  
+                        $sql="select * from iconos";
+                        $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                        $numRegistros=mysql_num_rows($consulta);
+                        if($numRegistros>0) {
                             while($resultado=mysql_fetch_array($consulta)){
                             ?>
                         <option value="<?=$resultado[1]?>"><?=$resultado[0]?></option>

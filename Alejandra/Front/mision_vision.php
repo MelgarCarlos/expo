@@ -18,7 +18,7 @@ session_start();
     <div style="padding: 5% 8% 1% 8%;" >
         <div class="bg-grayLighter" style="padding-bottom: 1%;">
             <center>
-                <h3 class="bg-darkGreen fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-lamp" ></span> Misión</h3>
+                <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-lamp" ></span> Misión</h3>
             </center>
             <p class="align-justify" style="font-size: 18px;line-height: 25px;padding: 1% 2% 0% 2%;">
                 Somos una organización con una clara vocación de prestar servicio integral al cliente dentro de la industria gráfica.
@@ -32,7 +32,7 @@ session_start();
         </div>
         <div class="bg-grayLighter" style="margin-top: 50px;padding-bottom: 1%;">
             <center>
-                <h3 class="bg-darkGreen fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-eye" ></span> Visión</h3>
+                <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-eye" ></span> Visión</h3>
             </center>
             <p class="align-justify"  style="font-size: 18px;line-height: 25px;padding: 0% 2% 0% 2%;">
                      Pretendemos comprender las necesidades y expectativas de nuestros clientes y de las personas de nuestra organización en un ambiente de cooperación y trabajo en equipo que nos permita, consolidar nuestra presencia tanto en el mercado nacional como en el mercado europeo siendo reconocidos por nuestra alta calidad y tecnología, y preferida como suministrador de nuestros clientes.

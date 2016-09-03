@@ -32,12 +32,11 @@ if(!verificar_usuario()){
                 </thead>
                 <tbody>
                     <?php 
-                                $db = mysql_connect("localhost", "root", "") or die ("No conecto con el servidor");
-                                    mysql_select_db("expo") or die ("No se pudo seleccionar la base de datos");
-                                    $sql="select * from iconos";
-                                    $consulta=mysql_query($sql,$db) or die ("error ".mysql_error());
-                                    $numRegistros=mysql_num_rows($consulta);
-                                    if($numRegistros>0) {
+                            include '../login/conexion.php'; 
+                            $sql="select * from iconos";
+                            $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                            $numRegistros=mysql_num_rows($consulta);
+                            if($numRegistros>0) {
                             while($row=mysql_fetch_array($consulta)){
                             ?>
                 <tr>

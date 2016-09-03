@@ -21,7 +21,6 @@ session_start();
     $var=-1;
     $cont=0;
     $user="";
-    $var="";
     for($i=0;$i<strlen($url);$i++){ 
     if($url[$i]=='?'){
         $cont++;
@@ -34,9 +33,10 @@ session_start();
             $var=count($url)-1;
         }
     }
-    if(!empty($var)){
+    echo $var;
+    if(empty($var)){
         $var=intval(base64_decode($var));
-    }  else {
+    }else {
     $var=-1;    
     }
     $user=base64_decode($user);

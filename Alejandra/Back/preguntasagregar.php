@@ -17,10 +17,9 @@ if(!verificar_usuario()){
     <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
-	$conexion=mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");
+            include '../login/conexion.php';
 	$valor=1;
         $guardaru=null;
-	mysql_select_db("expo") or die("No se pudo seleccionar la base de datos");
 	if (isset($_POST["enviar_btn"]))
 	{ 
                 $guardaru=FALSE;

@@ -39,10 +39,9 @@ if(!verificar_usuario()){
     <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
-	$conexion=mysql_connect("localhost","root","") or die("No se pudo conectar con el servidor");
-	$valor=1;
+        include '../login/conexion.php';
+        $valor=1;
         $guardaru=null;
-	mysql_select_db("sistema_conductual") or die("No se pudo seleccionar la base de datos");
 	if (isset($_POST["enviar_btn"]))
 	{ 
                 $guardaru=false;
@@ -97,7 +96,7 @@ if(!verificar_usuario()){
             <?php
         }
     }
-    include 'menu.php';
+    include 'menu2.php';
     ?>
     
     <table style="width: 60%;margin: 0px;padding: 0px;">
@@ -131,10 +130,28 @@ if(!verificar_usuario()){
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Usuario</label>
+                <label> Apellido</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="apellido_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <label> Usuario</label>
+                <br>
+                <div style="width: 100%;" autocomplete="off" class="input-control text" data-role="input" >
                     <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div  style="padding: 1% 30% 1% 30%;">                
+                <label> Email</label>
+                <br>
+                <div  style="width: 100%;" class="input-control text" data-role="input">
+                    <input name="email_txt" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -144,7 +161,7 @@ if(!verificar_usuario()){
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia_txt" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
+                    <input name="contrasenia_txt" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -155,6 +172,37 @@ if(!verificar_usuario()){
                     <span class="mif-lock prepend-icon"></span>
                     <input name="contrasenia2_txt" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <label> Pregunta de seguridad</label>
+                <br>
+                <div class="input-control select" style="width:100%;">
+                    <select name="pregunta_cb" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
+                        <option value="">Seleccione una opcion</option>                
+                        <?php 
+                        include '../login/conexion.php';  
+                        $sql="select * from preguntas";
+                        $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                        $numRegistros=mysql_num_rows($consulta);
+                        if($numRegistros>0) {
+                            while($resultado=mysql_fetch_array($consulta)){
+                            ?>
+                        <option value="<?=$resultado[0]?>"><?=$resultado[1]?></option>
+                            <?php }}?>
+                    </select>
+                    <span class="mif-arrow-down prepend-icon"></span>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <label> Respuesta</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="respuesta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
@@ -171,7 +219,8 @@ if(!verificar_usuario()){
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
-            </div>  
+            </div>
+            
             <div style="padding: 1% 30% 1% 30%;">
                 <button name="enviar_btn" class="button success block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Guardar</button>
             </div>
