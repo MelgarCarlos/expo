@@ -4,6 +4,7 @@ session_start();
 if(!verificar_usuario()){
     header("location: ../index.php");
 }
+include '../login/tiempo.php';
 ?>
 <!doctype html>
 <html>

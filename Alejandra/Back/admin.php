@@ -4,6 +4,7 @@ session_start();
 if(!verificar_usuario()){
     header("location: ../Front/login.php");
 }
+include '../login/tiempo.php'; 
 ?>
 <!doctype html>
 <html>

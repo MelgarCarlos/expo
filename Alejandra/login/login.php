@@ -15,6 +15,7 @@
                         $_SESSION['tipo']=$resultado['tipo'];
                         $_SESSION['estado']=$resultado['estado'];
 		        $_SESSION['user']=$_POST['user_login'];
+                        $_SESSION["ultimoAcceso"]= date("Y-n-j H:i:s");
 		        header("location: ../Back/admin.php");
 		    }
 		    else
@@ -26,7 +27,7 @@
         }else{
             $dir="";
             $url=$_SERVER['REQUEST_URI'];
-            for ($i = (strlen($url)-9); $i <= strlen($url); $i++) {
+            for ($i = (strlen($url)-9); $i < count($url); $i++) {
                 $dir=$dir.$url[$i];
             }
             if(!empty($dir)){
