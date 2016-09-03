@@ -18,7 +18,7 @@ session_start();
     <div style="padding: 5% 8% 1% 8%;" >
         <div>
             <center>
-                <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"> Trazos Digitales - Bienvenido</h3>
+                <h3 class="bg-grayLighter fg-black padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><img src="../img/logo/logo.png" style="width: 20%;"> Trazos Digitales - Bienvenido</h3>
             </center>
             <div class="bg-grayLighter" style="overflow: hidden;">
                 <div class="carousel place-left" data-role="carousel" data-height="380px" data-width="100%" data-controls="false" data-period="3000">
@@ -67,40 +67,43 @@ session_start();
                 </div>
             </div>
         </div>
-        <div class="grid" style="margin-top: 5%;">
-                <div class="row cells3">
+        
+                <?php 
+                            include '../login/conexion.php'; 
+                            $sql="select * from servicios limit 3";
+                            $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                            $numRegistros=mysql_num_rows($consulta);
+                            if($numRegistros>0) {
+                                ?>
+            <div class="grid" style="margin-top: 5%;">
+            <?php
+                                if($numRegistros<3){
+                            echo  '<div class="row cells'.$numRegistros.'">';       
+                                }else{
+                            echo  '<div class="row cells3">';
+                                }
+                            while($row=mysql_fetch_array($consulta)){
+                            ?>
+                
                     <div class="cell align-center padding10">
                         <div>
-                            <span class="mif-users bg-darkOrange fg-white" style="padding:10%;font-size: 120px;border-radius: 50%;"></span>
+                            <span class="<?=$row[3]?> bg-darkOrange fg-white" style="padding:10%;font-size: 120px;border-radius: 50%;"></span>
                         </div>
-                        <h5>Integridad</h5>
+                        <h5><?=$row[1]?></h5>
                         <p class="align-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis ex ut libero maximus facilisis. Vestibulum fringilla elit fringilla, euismod turpis luctus, viverra erat. Quisque finibus non justo in placerat. Mauris vehicula interdum metus a auctor. Aliquam egestas non felis porttitor rhoncus. Vestibulum non semper eros, id tincidunt ipsum. Fusce rhoncus pharetra lorem. Nullam dignissim porta augue quis consequat. Morbi euismod at lectus vel luctus. Mauris finibus sem eget mi rhoncus, a imperdiet nunc feugiat. Proin nec molestie ligula. Duis eu pulvinar augue. Vivamus neque nisl, aliquam eu dolor at, lacinia accumsan arcu. Fusce condimentum erat eget leo faucibus ultrices.
+                            <?=$row[2]?>
                         </p>
                     </div>
-                    <div class="cell align-center padding10">
-                        <div>
-                            <span class="mif-broadcast bg-darkOrange fg-white" style="padding:10%;font-size: 120px;border-radius: 50%;"></span>
-                        </div>
-                        <h5>Comunicación</h5>
-                        <p class="align-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis ex ut libero maximus facilisis. Vestibulum fringilla elit fringilla, euismod turpis luctus, viverra erat. Quisque finibus non justo in placerat. Mauris vehicula interdum metus a auctor. Aliquam egestas non felis porttitor rhoncus. Vestibulum non semper eros, id tincidunt ipsum. Fusce rhoncus pharetra lorem. Nullam dignissim porta augue quis consequat. Morbi euismod at lectus vel luctus. Mauris finibus sem eget mi rhoncus, a imperdiet nunc feugiat. Proin nec molestie ligula. Duis eu pulvinar augue. Vivamus neque nisl, aliquam eu dolor at, lacinia accumsan arcu. Fusce condimentum erat eget leo faucibus ultrices.
-                        </p>
-                    </div>
-                    <div class="cell align-center padding10">
-                        <div>
-                            <span class="mif-security bg-darkOrange fg-white" style="padding:10%;font-size: 120px;border-radius: 50%;"></span>
-                        </div>
-                        <h5>Disciplina</h5>
-                        <p class="align-justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis ex ut libero maximus facilisis. Vestibulum fringilla elit fringilla, euismod turpis luctus, viverra erat. Quisque finibus non justo in placerat. Mauris vehicula interdum metus a auctor. Aliquam egestas non felis porttitor rhoncus. Vestibulum non semper eros, id tincidunt ipsum. Fusce rhoncus pharetra lorem. Nullam dignissim porta augue quis consequat. Morbi euismod at lectus vel luctus. Mauris finibus sem eget mi rhoncus, a imperdiet nunc feugiat. Proin nec molestie ligula. Duis eu pulvinar augue. Vivamus neque nisl, aliquam eu dolor at, lacinia accumsan arcu. Fusce condimentum erat eget leo faucibus ultrices.
-                        </p>
-                    </div>
-                </div>
+                            <?php }
+                            echo "</div>";
+                            ?>
             <div class="align-center">
-                <a href="" class="button bg-darkOrange fg-white"><span class="icon mif-info" style="padding-bottom: 2px;"></span> Ver mas...</a>
+                <a href="quienes.php" class="button bg-darkOrange fg-white"><span class="icon mif-info" style="padding-bottom: 2px;"></span> Ver mas...</a>
             </div>
         </div>
+            <?php
+                            } ?>
+            
     </div>
     <?php
     include 'footer.php';

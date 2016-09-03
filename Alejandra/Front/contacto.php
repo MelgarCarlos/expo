@@ -18,7 +18,7 @@ session_start();
     <div style="padding: 5% 8% 1% 8%;" >
         <div class="bg-grayLighter">
             <center>
-                <h3 class="bg-darkGreen fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-lamp" ></span> Contacto</h3>
+                <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-lamp" ></span> Contacto</h3>
             </center>
             <form data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
             <div style="padding: 1% 30% 1% 30%;">
