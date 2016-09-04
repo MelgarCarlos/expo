@@ -69,7 +69,7 @@ include '../login/tiempo.php';
             </td>
             <td>&nbsp;&nbsp;</td>
             <td style="width: 50%;padding-top:5px;">
-                <a href="preguntamanto.php">
+                <a href="preguntasmanto.php">
                 <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
                 </a>
             </td>

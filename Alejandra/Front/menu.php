@@ -37,13 +37,13 @@
                             <h4 class="text-light">Iniciar sesión</h4>
                             <div class="input-control text">
                                 <span class="mif-user prepend-icon"></span>
-                                <input name="user_login" type="text" data-validate-func="required" placeholder="Usuario" data-validate-hint="Llene el campo usuario" maxlength="40">
+                                <input name="user_login" type="text"  data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" maxlength="40">
                                 <span class="input-state-error mif-warning"></span>
                                 <span class="input-state-success mif-checkmark"></span>
                             </div>
                             <div class="input-control text">
                                 <span class="mif-lock prepend-icon"></span>
-                                <input name="user_password" type="password" data-validate-func="required" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña" maxlength="40">
+                                <input name="user_password" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}"  placeholder="Contraseña" data-validate-hint="Llene el campo contraseña" maxlength="40">
                                 <span class="input-state-error mif-warning"></span>
                                 <span class="input-state-success mif-checkmark"></span>
                             </div>

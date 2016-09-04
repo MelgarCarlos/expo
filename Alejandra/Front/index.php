@@ -23,7 +23,7 @@ session_start();
             <div class="bg-grayLighter" style="overflow: hidden;">
                 <div class="carousel place-left" data-role="carousel" data-height="380px" data-width="100%" data-controls="false" data-period="3000">
                     <?php
-                    $path='../img/slide/.';
+                    $path='../img/slide/';
                     $dir = opendir($path);
                     $files = array();
                     while ($current = readdir($dir)){

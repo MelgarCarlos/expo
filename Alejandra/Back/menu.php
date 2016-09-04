@@ -16,6 +16,7 @@
         <a class="dropdown-toggle" href="#"><span class="mif-cog icon fg-green"></span> Servicios</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="serviciosagregar.php"><span class="mif-cog icon fg-black" ></span> Servicios</a></li>
+            <li><a href="serviciosmanto.php"><span class="mif-pencil icon fg-black" ></span> Mantenimiento</a></li>
             <li><a href="iconos.php" target="_blank"><span class="mif-image icon fg-black" ></span> Iconos</a></li>
         </ul>
     </li>
@@ -23,7 +24,7 @@
         <a class="dropdown-toggle" href="#"><span class="mif-images icon fg-darkRed"></span> Editor Slider</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="slideragregar.php"><span class="mif-images icon fg-black" ></span> Agregar imagenes</a></li>
-            <li><a href="iconos.php" target="_blank"><span class="mif-image icon fg-black" ></span> Iconos</a></li>
+            <li><a href="slidermanto.php"><span class="mif-pencil icon fg-black" ></span> Mantenimiento</a></li>
         </ul>
     </li>
     <li class="stick bg-darkGray">

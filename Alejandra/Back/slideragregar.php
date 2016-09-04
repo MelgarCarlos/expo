@@ -28,14 +28,13 @@ include '../login/tiempo.php';
                 if( $current != "." && $current != "..") {
                     if(is_dir($path.$current)) {
                         showFiles($path.$current.'/');
-                        $count++;
                     }
                     else {
                         $files[] = $current;
                     }
                 }
             }
-        $nombre="img_slide_".(count( $files )+1).".png";
+        $nombre="img_slide_".$_FILES['img']['name'];
         $dir_subida = '../img/slide/';
         $fichero_subido = $dir_subida .$nombre;
         if (move_uploaded_file($_FILES['img']['tmp_name'], $fichero_subido)) {
@@ -88,12 +87,12 @@ include '../login/tiempo.php';
         <tr>
             <td style="width: 50%;padding-top:5px;">
                 <a href="slideragregar.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar usuario</h5>
+                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar imagen</h5>
                 </a>
             </td>
             <td>&nbsp;&nbsp;</td>
             <td style="width: 50%;padding-top:5px;">
-                <a href="">
+                <a href="slidermanto.php">
                 <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
                 </a>
             </td>
@@ -115,7 +114,7 @@ include '../login/tiempo.php';
             </div>
         </div>
         <div style="padding: 1% 30% 1% 30%;">
-            <button name="enviar_btn" class="button success block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Guardar</button>
+            <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
         </div>
     </form>
     <?php }else{ ?>

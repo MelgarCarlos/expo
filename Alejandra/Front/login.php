@@ -72,7 +72,7 @@ session_start();
             <br />
             <div style="padding:2% 10% 2% 10%;">
                 <div class="input-control modern text iconic" data-role="input" style="width: 100%;">
-                <input name="user_login" type="text" data-validate-func="required" data-validate-hint="Llene el campo usuario" maxlength="40" <?php if($var==0){?> value="<?=$user?>" <?php } ?> >
+                <input name="user_login" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$"  data-validate-hint="Llene el campo usuario con el formato valido" maxlength="40" <?php if($var==0){?> value="<?=$user?>" <?php } ?> >
                 <span class="label">Usuario</span>
                 <span class="informer">Ingrese su usuario</span>
                 <span class="placeholder">Usuario</span>
@@ -84,7 +84,7 @@ session_start();
             
             <div style="padding:2% 10% 2% 10%;">
             <div class="input-control modern password iconic" data-role="input" style="width: 100%;">
-                <input name="user_password" type="password" data-validate-func="required" data-validate-hint="Llene el campo contraseña" maxlength="40">
+                <input name="user_password" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}"  data-validate-hint="Llene el campo contraseña" maxlength="40">
                 <span class="label">Contraseña</span>
                 <span class="informer">Ingrese su contraseña</span>
                 <span class="placeholder">Contraseña</span>
