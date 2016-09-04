@@ -10,7 +10,6 @@
             <li style="padding-right: 5px;padding-left: 5px;"><a href="quienes.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-list2"></span>¿Qué Ofrecemos?</a></li>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="promocion.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-dollars"></span>Promociones</a></li>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="mision_vision.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-cog"></span>Misión y Visión</a></li>
-            <li style="padding-right: 5px;padding-left: 5px;"><a href="contacto.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-mail"></span>Contáctanos</a></li>
             <?php
             if(verificar_usuario()){
             ?>
