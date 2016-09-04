@@ -35,7 +35,7 @@ include '../login/tiempo.php';
         <a class="fg-cobalt" href="slideragregar.php"><span class="mif-arrow-left mif-2x"></span> Regresar</a>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de iconos</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de imagenes</h4>
         </center>
         </div>
     <table class="table border bordered hovered">

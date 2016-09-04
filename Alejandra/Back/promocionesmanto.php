@@ -19,7 +19,7 @@ include '../login/tiempo.php';
     include 'nav.php';
     ?>
     <div style="padding: 5% 5% 5% 5%;">
-        <a class="fg-cobalt" href="preguntasagregar.php"><span class="mif-arrow-left mif-2x"></span> Regresar</a>
+        <a class="fg-cobalt" href="promocionesagregar.php"><span class="mif-arrow-left mif-2x"></span> Regresar</a>
             <?php
             if(isset($_POST['eliminar_btn'])){
                 $consulta="delete from preguntas where id=('".$_POST['codigo']."')";
@@ -96,14 +96,15 @@ include '../login/tiempo.php';
         <?php } ?>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de preguntas</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de promociones</h4>
         </center>
         </div>
     <table class="dataTable border bordered hovered" data-role="datatable" data-searching="true">
                 <thead>
                 <tr>
-                    <th>Codigo</th>
+                    <th>Titulo</th>
                     <th>Descripcion</th>
+                    <th>Imagen</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -111,7 +112,7 @@ include '../login/tiempo.php';
                 <tbody>
                     <?php 
                             include '../login/conexion.php'; 
-                            $sql="select * from preguntas";
+                            $sql="select * from promociones";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {

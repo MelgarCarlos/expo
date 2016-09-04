@@ -39,6 +39,14 @@ codigo varchar(30)
 )
 insert into iconos values ('broadcast','mif-broadcast'),('versions','mif-versions'),('lamp','mif-lamp'),('file-movie','mif-file-movie'),('location-city','mif-location-city'),('money','mif-money'),('looks','mif-looks'),('pencil','mif-pencil'),('images','mif-images'),('film','mif-film'),('file-empty','mif-file-empty'),('file-music','mif-file-music'),('stack','mif-stack'),('folder','mif-folder'),('tags','mif-tags'),('credit-card','mif-credit-card'),('wrench','mif-wrench'),('cogs','mif-cogs'),('gamepad','mif-gamepad'),('gamepad','mif-gamepad'),('dollars','mif-dollars'),('file-image','mif-file-image'),('file-code','mif-file-code'),('contacts-mail','mif-contacts-mail'),('camera','mif-camera'),('database','mif-database'),('clipboard','mif-clipboard'),('embed2','mif-embed2'),('layers','mif-layers')
 
+create table promociones(
+id int primary key,
+titulo varchar(40),
+descripcion varchar(200),
+dir varchar(400),
+vigencia date
+)
+
 create table producto(
 producto varchar(20) primary key,
 nombre varchar(10),

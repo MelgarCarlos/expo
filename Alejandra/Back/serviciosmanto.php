@@ -87,7 +87,7 @@ include '../login/tiempo.php';
                 <label>Titulo</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="titulo_txt" value="<?=$_POST['titulo']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
+                    <input name="titulo_txt" maxlength="30" value="<?=$_POST['titulo']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -96,7 +96,7 @@ include '../login/tiempo.php';
                 <label> Descripcion</label>
                 <br>
                 <div style="width: 100%;" class="input-control textarea" data-role="input" >
-                    <textarea style="resize:none;" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ,.ñ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)"><?=$_POST['descripcion']?></textarea>
+                    <textarea style="resize:none;" maxlength="300" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ,.ñ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)"><?=$_POST['descripcion']?></textarea>
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -136,12 +136,13 @@ include '../login/tiempo.php';
             </div>  
             <div style="padding: 1% 30% 1% 30%;">
                 <button name="modificar_btn" class="button bg-darkBlue fg-white block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Modificar</button>
+                <a style="padding:2%;" href="serviciosmanto.php" class="link">Cancelar</a>
             </div>
         </form>
         <?php } ?>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de preguntas</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-list2" ></span> Listado de servicios</h4>
         </center>
         </div>
     <table class="dataTable border bordered hovered" data-role="datatable" data-searching="true">
