@@ -223,7 +223,7 @@ include '../login/tiempo.php';
             </div>
             
             <div style="padding: 1% 30% 1% 30%;">
-                <button name="enviar_btn" class="button success block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Guardar</button>
+                <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
             </div>
         </form>
     </div>

@@ -18,7 +18,6 @@ session_start();
     }
     
     $url= $_SERVER["REQUEST_URI"];
-    $var=-1;
     $cont=0;
     $user="";
     for($i=0;$i<strlen($url);$i++){ 
@@ -29,15 +28,14 @@ session_start();
     if($cont==1 && $url[$i]!='?'){
             $user=$user.$url[$i];
         }
-    if($cont>1&& $url[$i]!='?'){
-            $var=count($url)-1;
+    if($cont>1 && $url[$i]!='?'){
+            $var=$var.$url[$i];
         }
     }
-    echo $var;
-    if(empty($var)){
+    if(!empty($var)){
         $var=intval(base64_decode($var));
     }else {
-    $var=-1;    
+        $var=-1;
     }
     $user=base64_decode($user);
     if(0==$var){
@@ -46,6 +44,17 @@ session_start();
             $(document).ready(function() {
                 setTimeout(function(){
                     $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Usuario o contraseña incorrectas"});
+                }, 150);
+            });
+    </script>
+    <?php
+    }
+    if(2==$var){
+    ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Se cerro la cuenta por inactividad"});
                 }, 150);
             });
     </script>
@@ -63,7 +72,7 @@ session_start();
             <br />
             <div style="padding:2% 10% 2% 10%;">
                 <div class="input-control modern text iconic" data-role="input" style="width: 100%;">
-                <input name="user_login" type="text" data-validate-func="required" data-validate-hint="Llene el campo usuario" maxlength="40" <?php if($var==0){?> value="<?=$user?>" <?php } ?> >
+                <input name="user_login" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$"  data-validate-hint="Llene el campo usuario con el formato valido" maxlength="40" <?php if($var==0){?> value="<?=$user?>" <?php } ?> >
                 <span class="label">Usuario</span>
                 <span class="informer">Ingrese su usuario</span>
                 <span class="placeholder">Usuario</span>
@@ -75,7 +84,7 @@ session_start();
             
             <div style="padding:2% 10% 2% 10%;">
             <div class="input-control modern password iconic" data-role="input" style="width: 100%;">
-                <input name="user_password" type="password" data-validate-func="required" data-validate-hint="Llene el campo contraseña" maxlength="40">
+                <input name="user_password" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}"  data-validate-hint="Llene el campo contraseña" maxlength="40">
                 <span class="label">Contraseña</span>
                 <span class="informer">Ingrese su contraseña</span>
                 <span class="placeholder">Contraseña</span>

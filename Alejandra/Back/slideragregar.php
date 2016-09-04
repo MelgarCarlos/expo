@@ -18,7 +18,7 @@ include '../login/tiempo.php';
     <div>
         <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
-        
+        $count=0;
 	if (isset($_POST["enviar_btn"]))
 	{ 
             $path='../img/slide/.';
@@ -34,7 +34,7 @@ include '../login/tiempo.php';
                     }
                 }
             }
-        $nombre="img_slide_".(count( $files )+1).".png";
+        $nombre="img_slide_".$_FILES['img']['name'];
         $dir_subida = '../img/slide/';
         $fichero_subido = $dir_subida .$nombre;
         if (move_uploaded_file($_FILES['img']['tmp_name'], $fichero_subido)) {
@@ -43,6 +43,18 @@ include '../login/tiempo.php';
             $guardaru=false;
         }
 	}
+        $path='../img/slide/.';
+            $dir = opendir($path);
+            while ($current = readdir($dir)){
+                if( $current != "." && $current != "..") {
+                    if(is_dir($path.$current)) {
+                        showFiles($path.$current.'/');
+                    }
+                    else {
+                        $count++;
+                    }
+                }
+            }
 ?>
             <?php
     if(isset($_POST["enviar_btn"])){
@@ -75,12 +87,12 @@ include '../login/tiempo.php';
         <tr>
             <td style="width: 50%;padding-top:5px;">
                 <a href="slideragregar.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar usuario</h5>
+                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar imagen</h5>
                 </a>
             </td>
             <td>&nbsp;&nbsp;</td>
             <td style="width: 50%;padding-top:5px;">
-                <a href="">
+                <a href="slidermanto.php">
                 <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
                 </a>
             </td>
@@ -91,6 +103,7 @@ include '../login/tiempo.php';
             <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-file-image" ></span> Agregar imagen a slider</h4>
         </center>
         </div>
+    <?php if($count<5){ ?>
     <form method="post" action="slideragregar.php" enctype="multipart/form-data">
         <div style="padding: 5% 30% 1% 30%;alignment-adjust: central;">
             <label> Imagen por agregar:</label>
@@ -101,9 +114,12 @@ include '../login/tiempo.php';
             </div>
         </div>
         <div style="padding: 1% 30% 1% 30%;">
-            <button name="enviar_btn" class="button success block-shadow-success text-shadow"><span class="mif-checkmark" style="padding-bottom: 5px;"></span> Guardar</button>
+            <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
         </div>
     </form>
+    <?php }else{ ?>
+    <h3>Se alcanzo el limite de imagenes para el slider</h3>
+    <?php }?>
     </div>
     </div>
     <?php

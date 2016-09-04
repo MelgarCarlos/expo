@@ -69,7 +69,7 @@ include '../login/tiempo.php';
             </td>
             <td>&nbsp;&nbsp;</td>
             <td style="width: 50%;padding-top:5px;">
-                <a href="preguntamanto.php">
+                <a href="preguntasmanto.php">
                 <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
                 </a>
             </td>
@@ -94,7 +94,7 @@ include '../login/tiempo.php';
                 <label> Pregunta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="pregunta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
+                    <input name="pregunta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ñ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
