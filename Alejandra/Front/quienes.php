@@ -7,7 +7,7 @@ session_start();
     <?php
     include 'librerias.php';
     ?>
-    <title>Quienes somos</title>
+    <title>Que ofrecemos</title>
 </head>
 <body style="background-color: #fffff9;">
     
@@ -18,7 +18,7 @@ session_start();
     <div style="padding: 5% 8% 1% 8%;" >
         <div class="bg-grayLighter">
             <center>
-                <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-lamp" ></span> Trazos Digitales</h3>
+                <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-cog" ></span> Trazos Digitales - Servicios</h3>
             </center>
             <p style="padding: 0px 2% 1% 2%;">
                 Estamos comprometidos a ofrecer siempre lo mejor a buen precio,  calidad, rapidez, precios competitivos y atención personalizada, además brindarles  asesoría en cuanto a lo que usted necesita. Sabemos que el mercado demanda de muchos productos innovadores, por lo que nosotros nos sujetamos a esas demandas, ofreciéndole herramientas publicitarias  para promover su empresa o institución.
@@ -26,7 +26,7 @@ session_start();
         </div>
          <?php 
                             include '../login/conexion.php'; 
-                            $sql="select * from servicios limit 3";
+                            $sql="select * from servicios";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {

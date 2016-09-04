@@ -12,9 +12,9 @@ include '../login/tiempo.php';
     <?php
     include 'librerias.php';
     ?>
-    <title>Preguntas mantenimiento</title>
+    <title>Promocion mantenimiento</title>
 </head>
-<body style="background-color: #fffff9;">¿
+<body style="background-color: #fffff9;">
     <?php
     include 'nav.php';
     ?>
@@ -22,7 +22,8 @@ include '../login/tiempo.php';
         <a class="fg-cobalt" href="promocionesagregar.php"><span class="mif-arrow-left mif-2x"></span> Regresar</a>
             <?php
             if(isset($_POST['eliminar_btn'])){
-                $consulta="delete from preguntas where id=('".$_POST['codigo']."')";
+                $consulta="delete from promociones where id=('".$_POST['codigo']."')";
+                unlink($_POST['imgs']);
 		if(mysql_query($consulta,$conexion)){
                     ?>
         <script>
@@ -46,7 +47,20 @@ include '../login/tiempo.php';
             }
             ?>
         <?php if(isset($_POST['modificar_btn'])){
-                $consulta="update preguntas set pregunta=('".$_POST['pregunta_txt']."') where id='".$_POST['id_txt']."'";
+		$id=$_POST["id_txt"];
+		$ti=$_POST["titulo_txt"];
+                $des=$_POST["descripcion_txt"];
+                $fecha=$_POST['fecha_txt'];
+                
+                $dir_subida = '../img/promo/';
+                $nombre="img_promo_".$id.".png";
+                
+                if(strlen($_FILES['img']['tmp_name'])>0){
+                $fichero_subido = $dir_subida .$nombre;
+                unlink($fichero_subido);
+                move_uploaded_file($_FILES['img']['tmp_name'], $fichero_subido);
+                }
+                $consulta="update promociones set titulo='".$ti."',descripcion='".$des."',vigencia='".$fecha."' where id=".$id;
 		if(mysql_query($consulta,$conexion)){
                     ?>
         <script>
@@ -69,28 +83,58 @@ include '../login/tiempo.php';
         } }
             ?>
             <?php if(isset($_POST['modificarbtn'])){ ?>
-        <form action="preguntasmanto.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        <form action="promocionesmanto.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000" enctype="multipart/form-data">
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Id</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="id_txt" maxlength="11" type="text" value="<?=$_POST['codigo']?>" readonly="" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id de pregunta(solo numeros)">
+                    <input name="id_txt" value="<?=$_POST['codigo']?>" maxlength="11" type="text" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id del servicio(solo numeros)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
             </div>
-            <div style="padding: 1% 30% 1% 30%;">
-                <label> Pregunta</label>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label>Titulo</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="pregunta_txt" maxlength="100" value="<?=$_POST['pregunta']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ñ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
+                    <input name="titulo_txt" value="<?=$_POST['titulo']?>"  maxlength="40" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
-            </div> 
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Descripcion</label>
+                <br>
+                <div style="width: 100%;" class="input-control textarea" data-role="input" >
+                    <textarea style="resize:none;" maxlength="200" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)"><?=$_POST['descripcion']?></textarea>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Fecha de finalizacion</label>
+                <br>
+                <div class="input-control text" style="width: 100%;" data-role="datepicker">
+                    <input name="fecha_txt" value="<?=$_POST['fecha']?>" type="text" data-validate-func="required" placeholder="Fecha" data-validate-hint="Llene la fecha">
+                            <button class="button"><span class="mif-calendar"></span></button>
+                </div>
+            </div>
+        
+            <div style="padding: 1% 30% 1% 30%;alignment-adjust: central;">
+                <label> Imagen nueva: (Opcional)</label>
+                <br><br>
+                <div class="input-control file" data-role="input" style="width: 100%;">
+                    <input type="file" name="img" accept="image/png">
+                    <button class="button"><span class="mif-folder"></span></button>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;alignment-adjust: central;">
+                <label> Imagen actual:</label>
+                <br><br>
+                <img src="<?=$_POST['imagen']?>" style="width: 40%;">
+            </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <button name="modificar_btn" class="button bg-darkBlue fg-white block-shadow-success text-shadow"> Modificar</button>
-                <a style="padding:2%;" href="preguntasmanto.php" class="link">Cancelar</a>
+                <button name="modificar_btn" class="button fg-white bg-darkBlue block-shadow-success text-shadow"> Modificar</button>
             </div>
         </form>
         <?php } ?>
@@ -104,6 +148,7 @@ include '../login/tiempo.php';
                 <tr>
                     <th>Titulo</th>
                     <th>Descripcion</th>
+                    <th>Fecha fin</th>
                     <th>Imagen</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
@@ -120,14 +165,18 @@ include '../login/tiempo.php';
                             ?>
                 
                 <tr>
-                <form action="preguntasmanto.php" method="post">
-                    <td><?=$row[0]?><input name="codigo" type="hidden" value="<?=$row[0]?>"></td>
-                    <td><?=$row[1]?><input name="pregunta" type="hidden" value="<?=$row[1]?>"></td>
+                <form action="promocionesmanto.php" method="post">
+                    <input type="hidden" name="codigo" value="<?=$row[0]?>" readonly="">
+                    <td><?=$row[1]?><input name="titulo" type="hidden" value="<?=$row[1]?>"></td>
+                    <td><?=$row[2]?><input name="descripcion" type="hidden" value="<?=$row[2]?>"></td>
+                    <td style="width: 10%;"><?=$row[4]?><input name="fecha" type="hidden" value="<?=$row[4]?>"></td>
+                    <td style="width: 20%;"><img src="<?=$row[3]?>"><input name="imagen" type="hidden" value="<?=$row[3]?>"></td>
                     <td><button name="modificarbtn" class="button icon mif-pencil bg-darkBlue fg-white"></button></td>
                 </form>
-                <form action="preguntasmanto.php" method="post">
+                <form action="promocionesmanto.php" method="post">
                     <td><span class="button icon mif-cancel bg-red fg-white" onclick="showDialog('eliminar_form')"></span></td>
                     <input name="codigo" type="hidden" value="<?=$row[0]?>">
+                    <input name="imgs" type="hidden" value="<?=$row[3]?>">
                     <script>
                         function showDialog(id){
                             var dialog = $("#"+id).data('dialog');

@@ -20,6 +20,13 @@
             <li><a href="iconos.php" target="_blank"><span class="mif-image icon fg-black" ></span> Iconos</a></li>
         </ul>
     </li>
+    <li class="stick bg-amber">
+        <a class="dropdown-toggle" href="#"><span class="mif-dollars icon fg-amber"></span> Promociones</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="promocionesagregar.php"><span class="mif-dollars icon fg-black" ></span> Promociones</a></li>
+            <li><a href="promocionesmanto.php"><span class="mif-pencil icon fg-black" ></span> Mantenimiento</a></li>
+        </ul>
+    </li>
     <li class="stick bg-darkRed">
         <a class="dropdown-toggle" href="#"><span class="mif-images icon fg-darkRed"></span> Editor Slider</a>
         <ul class="d-menu" data-role="dropdown">
