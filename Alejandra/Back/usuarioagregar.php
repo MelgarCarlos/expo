@@ -2,7 +2,9 @@
 include '../login/login.php';
 session_start();
 if(!verificar_usuario()){
+    if($_SESSION['tipo']!=1){
     header("location: ../index.php");
+    }
 }
 include '../login/tiempo.php';
 ?>
