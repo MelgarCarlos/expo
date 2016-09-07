@@ -27,12 +27,11 @@
         }else{
             $dir="";
             $url=$_SERVER['REQUEST_URI'];
-            for ($i = (strlen($url)-9); $i < count($url); $i++) {
+            for ($i = (strlen($url)-15); $i < strlen($url); $i++) {
                 $dir=$dir.$url[$i];
             }
             if(!empty($dir)){
-                echo $dir;
-                if($dir=="login.php"){
+                if($dir=="login/login.php"){
                     header("location: ../Front/");
                 }
             }

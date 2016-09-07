@@ -12,7 +12,7 @@ include '../login/tiempo.php';
     <?php
     include 'librerias.php';
     ?>
-    <title>Agregar servicio</title>
+    <title>Agregar producto</title>
 </head>
 <body style="background-color: #fffff9;">    
     <div>
@@ -23,14 +23,25 @@ include '../login/tiempo.php';
         $guardaru=null;
 	if (isset($_POST["enviar_btn"]))
 	{ 
-                $guardaru=FALSE;
+                $guardaru=false;
 		$id=$_POST["id_txt"];
 		$ti=$_POST["titulo_txt"];
                 $des=$_POST["descripcion_txt"];
-                $ico=$_POST["comboicono"];
-		$consulta="INSERT INTO servicios VALUES(".$id.",'".$ti."','".$des."','".$ico."')";
-		if(mysql_query($consulta,$conexion)){
+                $nombre="img_pro_".$id.".png";
+                $dir_subida = '../img/productos/';
+                $fichero_subido = $dir_subida .$nombre;
+                if (move_uploaded_file($_FILES['img']['tmp_name'], $fichero_subido)) {
                     $guardaru=true;
+                } else {
+                    $guardaru=false;
+                }
+                
+		$consulta="INSERT INTO productos VALUES(".$id.",'".$ti."','".$des."','".$fichero_subido."',1)";
+                if(mysql_query($consulta,$conexion)){
+                    $guardaru=true;
+                }else{
+                     $guardaru=false;
+                     unlink($fichero_subido);
                 }
 	}
 ?>
@@ -65,13 +76,13 @@ include '../login/tiempo.php';
     <table style="width: 60%;margin: 0px;padding: 0px;">
         <tr>
             <td style="width: 50%;padding-top:5px;">
-                <a href="serviciosagregar.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar servicio</h5>
+                <a href="productosagregar.php">
+                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar productos</h5>
                 </a>
             </td>
             <td>&nbsp;&nbsp;</td>
             <td style="width: 50%;padding-top:5px;">
-                <a href="serviciosmanto.php">
+                <a href="productosmanto.php">
                 <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
                 </a>
             </td>
@@ -79,10 +90,10 @@ include '../login/tiempo.php';
     </table>
         <div class="bg-grayLighter" style="margin: 0px;">
         <center>
-            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-cog" ></span> Agregar servicio</h4>
+            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-barcode" ></span> Agregar productos</h4>
         </center>
         </div>
-    <form action="serviciosagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+    <form action="productosagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000" enctype="multipart/form-data">
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Id</label>
                 <br>
@@ -93,10 +104,10 @@ include '../login/tiempo.php';
                 </div>
             </div>
         <div style="padding: 1% 30% 1% 30%;">
-                <label>Titulo</label>
+                <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="titulo_txt"  maxlength="30" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
+                    <input name="titulo_txt"  maxlength="40" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -105,44 +116,19 @@ include '../login/tiempo.php';
                 <label> Descripcion</label>
                 <br>
                 <div style="width: 100%;" class="input-control textarea" data-role="input" >
-                    <textarea style="resize:none;" maxlength="300" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ,.ñ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)"></textarea>
+                    <textarea style="resize:none;" maxlength="200" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Descripciòn" data-validate-hint="Llene el campo de descripciòn(solo letras)"></textarea>
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>        
+        <div style="padding: 1% 30% 1% 30%;alignment-adjust: central;">
+                <label> Imagen por agregar:</label>
+                <br><br>
+                <div class="input-control file" data-role="input" style="width: 100%;">
+                    <input type="file" name="img" accept="image/png" data-validate-func="required" data-validate-hint="Ingrese una imagen">
+                    <button class="button"><span class="mif-folder"></span></button>
                 </div>
             </div>
-            <div style="padding: 1% 30% 1% 30%;">
-                <label>Icono - <a class="fg-cobalt" href="iconos.php" target="_black">Ver todos</a></label>
-                <br>
-                <div class="input-control select" style="width:100%;">
-                    <select id="select_icon" onchange="onChange()"  name="comboicono" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
-                        <option value="">Seleccione una opcion</option>                
-                        <?php 
-                        include '../login/conexion.php';  
-                        $sql="select * from iconos";
-                        $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
-                        $numRegistros=mysql_num_rows($consulta);
-                        if($numRegistros>0) {
-                            while($resultado=mysql_fetch_array($consulta)){
-                            ?>
-                        <option value="<?=$resultado[1]?>"><?=$resultado[0]?></option>
-                            <?php }}?>
-                    </select>
-                    <span class="mif-arrow-down prepend-icon"></span>
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
-                <div>
-                    <span id="icono_select" class="" style="padding: 20px;"></span>
-                </div>
-                <script>
-                            function onChange(){
-                            var s=document.getElementById("select_icon");
-                            var span=document.getElementById("icono_select");
-                            span.setAttribute("class","");
-                            span.setAttribute("class",s.value+" mif-3x");
-                            }
-                        </script>
-            </div>  
             <div style="padding: 1% 30% 1% 30%;">
                 <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
             </div>

@@ -74,7 +74,7 @@ include '../login/tiempo.php';
                 <label> Id</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="id_txt" type="text" value="<?=$_POST['codigo']?>" readonly="" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id de pregunta(solo numeros)">
+                    <input name="id_txt" maxlength="11" type="text" value="<?=$_POST['codigo']?>" readonly="" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id de pregunta(solo numeros)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -83,7 +83,7 @@ include '../login/tiempo.php';
                 <label> Pregunta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="pregunta_txt" value="<?=$_POST['pregunta']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ñ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
+                    <input name="pregunta_txt" maxlength="100" value="<?=$_POST['pregunta']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ñ])+$" placeholder="Pregunta" data-validate-hint="Llene el campo de pregunta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>

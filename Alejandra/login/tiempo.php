@@ -9,6 +9,7 @@ $fechaGuardada = $_SESSION["ultimoAcceso"];
       session_destroy(); // destruyo la sesión
       header("Location: ../Front/login.php??".base64_encode("2")); //envío al usuario a la pag. de autenticación
       //sino, actualizo la fecha de la sesión
-    }else 
+    }else {
     $_SESSION["ultimoAcceso"] = $ahora;
+    }
 ?>
