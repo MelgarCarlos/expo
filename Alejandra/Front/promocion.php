@@ -22,7 +22,7 @@ session_start();
     
     <?php 
                             include '../login/conexion.php'; 
-                            $sql="select * from promociones";
+                            $sql="select * from promociones where vigencia>'".date("Y-m-d")."'";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {

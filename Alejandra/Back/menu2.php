@@ -12,6 +12,13 @@
         </ul>
     </li>
     <?php } ?>
+    <li class="stick bg-teal">
+        <a class="dropdown-toggle" href="#"><span class="mif-barcode icon fg-teal"></span> Productos</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="productosagregar.php"><span class="mif-barcode icon fg-black" ></span> Productos</a></li>
+            <li><a href="productosmanto.php"><span class="mif-pencil icon fg-black" ></span> Mantenimiento</a></li>
+        </ul>
+    </li>
     <li class="stick bg-green">
         <a class="dropdown-toggle" href="#"><span class="mif-cog icon fg-green"></span> Servicios</a>
         <ul class="d-menu" data-role="dropdown">
