@@ -64,7 +64,7 @@ include '../login/tiempo.php';
                 $password2=$_POST["contrasenia2_txt"];
                 $mensaje="";
                 if(strcmp($password, $password2)==0){
-                    $consulta="INSERT INTO usuario(usuario, nombre, contrasena, tipo) VALUES('".$usua."','".$name."',AES_ENCRYPT('text','.".$password.".'),".$valor.")";
+                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',".$valor.",1)";
 		if(mysql_query($consulta,$conexion)){
                     $guardaru=true;
                 }
@@ -203,7 +203,7 @@ include '../login/tiempo.php';
                 <label> Respuesta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="respuesta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
+                    <input name="respuesta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
