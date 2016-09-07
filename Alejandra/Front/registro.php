@@ -1,12 +1,5 @@
 <?php 
-include '../login/login.php';
 session_start();
-if(!verificar_usuario()){
-    if($_SESSION['tipo']!=1){
-    header("location: ../index.php");
-    }
-}
-include '../login/tiempo.php';
 ?>
 <!doctype html>
 <html>
@@ -14,7 +7,8 @@ include '../login/tiempo.php';
     <?php
     include 'librerias.php';
     ?>
-    <title>Agregar usuario</title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <title>Registrarse</title>
 </head>
 <body style="background-color: #fffff9;">
     <!----Validacion de contraseñas--->
@@ -39,8 +33,7 @@ include '../login/tiempo.php';
     }
     
     </script>
-    <div>
-        <div class="bg-grayLighter" style="overflow: hidden;">
+    
         <?php
         include '../login/conexion.php';
         $valor=1;
@@ -48,23 +41,26 @@ include '../login/tiempo.php';
 	if (isset($_POST["enviar_btn"]))
 	{ 
                 $guardaru=false;
-		if($_POST["tipo_sl"]=='Administrador')
-		{
-			$valor=1;
-		} else if($_POST["tipo_sl"]=='Empleado')
-		{
-			$valor=2;
-		} else if($_POST["tipo_sl"]=='Cliente')
-		{
-			$valor=3;
-		}
 		$usua=$_POST["usuario_txt"];
 		$password=$_POST["contrasenia_txt"];
                 $password2=$_POST["contrasenia2_txt"];
                 $mensaje="";
-                
+                $secret="6LefmSkTAAAAAKagEgIQL-B679zKp7kVT8a0bu-X";
+                // respuesta vacía
+                $response = null;
+                // coge la librería recaptcha
+                require_once "recaptchalib.php";
+                // comprueba la clave secreta
+                $reCaptcha = new ReCaptcha($secret);
+                if ($_POST["g-recaptcha-response"]) {
+                $response = $reCaptcha->verifyResponse(
+                        $_SERVER["REMOTE_ADDR"],
+                        $_POST["g-recaptcha-response"]
+                    );
+                }
+                if ($response != null && $response->success) {
                 if(strcmp($password, $password2)==0){
-                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',".$valor.",1)";
+                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',3,1)";
 		if(mysql_query($consulta,$conexion)){
                         $nombre=$_POST["nombre_txt"];
                         $apellido=$_POST["apellido_txt"];
@@ -80,6 +76,10 @@ include '../login/tiempo.php';
                 }else{
                     $mensaje=": Las contraseñas no coinciden";
                 }
+                }else{
+                    $mensaje=": verifique si que no es un robot";
+                }
+                
                 
 	}
 ?>
@@ -108,30 +108,13 @@ include '../login/tiempo.php';
             <?php
         }
     }
-    include 'menu2.php';
+    include 'menu.php';
     ?>
-    
-    <table style="width: 60%;margin: 0px;padding: 0px;">
-        <tr>
-            <td style="width: 50%;padding-top:5px;">
-                <a href="usuarioagregar.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar usuario</h5>
-                </a>
-            </td>
-            <td>&nbsp;&nbsp;</td>
-            <td style="width: 50%;padding-top:5px;">
-                <a href="usuariomanto.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
-                </a>
-            </td>
-        </tr>
-    </table>
-        <div class="bg-grayLighter" style="margin: 0px;">
+    <div style="padding: 5% 8% 1% 8%;" >
         <center>
-            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar usuario</h4>
-        </center>
-        </div>
-        <form action="usuarioagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+            <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span class="icon mif-users"></span> Registrarme</h3>
+            </center>
+        <form action="registro.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Nombre</label>
                 <br>
@@ -218,26 +201,12 @@ include '../login/tiempo.php';
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Tipo</label>
-                <br>
-                <div class="input-control select" style="width:100%;">
-                    <select  name="tipo_sl" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
-                        <option value="">Seleccione una opción</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Empleado">Profesor</option>
-                        <option value="Cliente">Estudiante</option>
-                    </select>
-                    <span class="mif-arrow-down prepend-icon"></span>
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
+            <div class="g-recaptcha" data-sitekey="6LefmSkTAAAAADQB6NbG0hnc6jtRzhd0Ax_2F54s"></div>
             </div>
-            
             <div style="padding: 1% 30% 1% 30%;">
                 <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
             </div>
         </form>
-    </div>
     </div>
     <?php
     include 'footer.php';
