@@ -59,7 +59,9 @@ create table pedido(
 id int AUTO_INCREMENT primary key,
 fecha date,
 total double,
-estado smallint(1)
+estado smallint(1),
+usuario varchar(40),
+foreign key (usuario) references usuario(usuario)
 )
 
 create table detalle_pedido(
