@@ -50,7 +50,7 @@
                             <h4 class="text-light">Iniciar sesión</h4>
                             <div class="input-control text">
                                 <span class="mif-user prepend-icon"></span>
-                                <input name="user_login" type="text" autocomplete="off"  data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" maxlength="40">
+                                <input name="user_login" type="text" autocomplete="off"  data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" maxlength="40">
                                 <span class="input-state-error mif-warning"></span>
                                 <span class="input-state-success mif-checkmark"></span>
                             </div>

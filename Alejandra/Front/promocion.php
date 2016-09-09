@@ -26,13 +26,13 @@ if(verificar_usuario()){
     
     <?php 
                             include '../login/conexion.php'; 
-                            $sql="select * from promociones where vigencia>'".date("Y-m-d")."'";
+                            $sql="select * from promociones where vigencia>='".date("Y-m-d")."'";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {
                                 ?>
-            <div class="grid">
-            <?php
+                            <div class="grid">
+                            <?php
                                 if($numRegistros<3){
                             echo  '<div class="row cells'.$numRegistros.'">';       
                                 }else{
@@ -55,7 +55,7 @@ if(verificar_usuario()){
                             <?php }
                             echo "</div>";
                             ?>
-        </div>
+                    </div>
             <?php
                             }else{ ?>
         <h4 style="padding: 5%;">Por el momento no contamos con ninguna promcion disponible, mantente pendiente para futuras promociones.</h4> 

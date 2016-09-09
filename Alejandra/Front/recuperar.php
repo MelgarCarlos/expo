@@ -19,7 +19,7 @@ if(verificar_usuario()){
     include 'menu.php';
     if(isset($_POST['modificar_btn'])){
             include '../login/conexion.php';
-            $consulta="update usuario set contrasena='".  md5($_POST['contrasenia_txt'])."' where usuario='".$_POST['usuario']."'";
+            $consulta="update usuario set contrasena='".  md5($_POST['contrasenia_txt'])."' where usuario='".$_POST['usuario']."'  and usuario_info.pregunta=preguntas.id";
                         if(mysql_query($consulta,$conexion)){
                            ?>
     <script>
