@@ -1,5 +1,9 @@
 <?php 
+include '../login/login.php';
 session_start();
+if(verificar_usuario()){
+    include '../login/tiempo.php';
+}
 ?>
 <!doctype html>
 <html>
@@ -71,6 +75,7 @@ session_start();
                                 . ",'".$correo."',".$pregunta.",'".$respuesta."')";
                         if(mysql_query($consulta,$conexion)){
                             $guardaru=true;
+                            header("location: login.php??".base64_encode("1"));
                         }
                 }
                 }else{
@@ -85,18 +90,7 @@ session_start();
 ?>
             <?php
     if(isset($_POST["enviar_btn"])){
-        if($guardaru==true){
-    ?>
-    <script>
-            $(document).ready(function() {
-                setTimeout(function(){
-                    $.Notify({keepOpen: true, type: 'success', caption: 'Mensaje', content: "Se guardo exitosamente"});
-                }, 150);
-            });
-    </script>
-    
-    <?php
-        }else{
+        if($guardaru==false){
             ?>
     <script>
             $(document).ready(function() {
@@ -119,7 +113,7 @@ session_start();
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="nombre_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
+                    <input name="nombre_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -128,7 +122,7 @@ session_start();
                 <label> Apellido</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="apellido_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
+                    <input name="apellido_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -137,7 +131,7 @@ session_start();
                 <label> Usuario</label>
                 <br>
                 <div style="width: 100%;" autocomplete="off" class="input-control text" data-role="input" >
-                    <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
+                    <input name="usuario_txt" type="text" maxlength="40" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -146,7 +140,7 @@ session_start();
                 <label> Email</label>
                 <br>
                 <div  style="width: 100%;" class="input-control text" data-role="input">
-                    <input name="email_txt" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
+                    <input name="email_txt" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -156,7 +150,7 @@ session_start();
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia_txt" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
+                    <input name="contrasenia_txt"  maxlength="10" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -165,7 +159,7 @@ session_start();
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia2_txt" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
+                    <input name="contrasenia2_txt"  maxlength="10" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -195,7 +189,7 @@ session_start();
                 <label> Respuesta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="respuesta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
+                    <input name="respuesta_txt"  maxlength="50" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>

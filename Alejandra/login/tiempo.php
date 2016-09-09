@@ -1,5 +1,5 @@
 <?php
-$fechaGuardada = $_SESSION["ultimoAcceso"];
+    $fechaGuardada = $_SESSION["ultimoAcceso"];
     $ahora = date("Y-n-j H:i:s");
     $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
     

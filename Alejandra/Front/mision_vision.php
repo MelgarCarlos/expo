@@ -1,5 +1,9 @@
 <?php 
+include '../login/login.php';
 session_start();
+if(verificar_usuario()){
+    include '../login/tiempo.php';
+}
 ?>
 <!doctype html>
 <html>

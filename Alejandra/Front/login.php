@@ -1,5 +1,9 @@
 <?php 
+include '../login/login.php';
 session_start();
+if(verificar_usuario()){
+    include '../login/tiempo.php';
+}
 ?>
 <!doctype html>
 <html>
@@ -32,11 +36,13 @@ session_start();
             $var=$var.$url[$i];
         }
     }
+    
     if(!empty($var)){
         $var=intval(base64_decode($var));
     }else {
         $var=-1;
     }
+    
     $user=base64_decode($user);
     if(0==$var){
     ?>
@@ -59,9 +65,18 @@ session_start();
             });
     </script>
     <?php
+    }if(1==$var){
+    ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'success', caption: 'Mensaje', content: "Se registro correctamente por favor inicie sesion"});
+                }, 150);
+            });
+    </script>
+    <?php
     }
     ?>
-    
     <div style="padding: 8% 20% 8% 20%;margin: 20px 0px 10px 0px;" >
         <div class="login-form padding20" style="margin: 10px;-webkit-box-shadow: -1px 0px 25px -5px rgba(89,87,89,1);
         -moz-box-shadow: -1px 0px 25px -5px rgba(89,87,89,1);
@@ -96,7 +111,10 @@ session_start();
             </div>
             <div class="form-actions"  style="padding:2% 10% 2% 6%;">
                 <button name="login" class="button bg-darkBlue fg-white"><span style="padding-bottom: 4px;" class="mif-switch"></span> Iniciar sesión</button>
-                <div name="login" class="button link">Registrarme</div>
+                <a href="registro.php" class="button link">Registrarme</a>
+            </div>
+            <div style="padding:2% 10% 2% 10%;">
+            <a href="recuperar.php" class="button link">¿Olvidaste tu contraseña?</a>
             </div>
         </form>
         </div>

@@ -136,7 +136,7 @@ include '../login/tiempo.php';
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="nombre_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
+                    <input name="nombre_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -145,7 +145,7 @@ include '../login/tiempo.php';
                 <label> Apellido</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="apellido_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
+                    <input name="apellido_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -153,8 +153,8 @@ include '../login/tiempo.php';
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Usuario</label>
                 <br>
-                <div style="width: 100%;" autocomplete="off" class="input-control text" data-role="input" >
-                    <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
+                <div style="width: 100%;" maxlength="40" autocomplete="off" class="input-control text" data-role="input" >
+                    <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" autocomplete="off">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -163,7 +163,7 @@ include '../login/tiempo.php';
                 <label> Email</label>
                 <br>
                 <div  style="width: 100%;" class="input-control text" data-role="input">
-                    <input name="email_txt" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
+                    <input name="email_txt" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido"  autocomplete="off">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -173,7 +173,7 @@ include '../login/tiempo.php';
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia_txt" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
+                    <input name="contrasenia_txt"  maxlength="10" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -182,7 +182,7 @@ include '../login/tiempo.php';
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia2_txt" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
+                    <input name="contrasenia2_txt" maxlength="10" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -212,7 +212,7 @@ include '../login/tiempo.php';
                 <label> Respuesta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="respuesta_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
+                    <input name="respuesta_txt"  maxlength="50" type="text"  autocomplete="off" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -224,8 +224,8 @@ include '../login/tiempo.php';
                     <select  name="tipo_sl" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
                         <option value="">Seleccione una opción</option>
                         <option value="Administrador">Administrador</option>
-                        <option value="Empleado">Profesor</option>
-                        <option value="Cliente">Estudiante</option>
+                        <option value="Empleado">Empleado</option>
+                        <option value="Cliente">Cliente</option>
                     </select>
                     <span class="mif-arrow-down prepend-icon"></span>
                     <span class="input-state-error mif-warning"></span>
