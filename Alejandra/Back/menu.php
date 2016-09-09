@@ -7,8 +7,17 @@
     <li class="stick bg-orange">
         <a class="dropdown-toggle" href="#"><span class="mif-users icon fg-orange"></span> Usuarios</a>
         <ul class="d-menu" data-role="dropdown">
-            <li><a href="usuarioagregar.php"><span class="mif-user icon fg-black" ></span> Usuarios</a></li>
+            <li><a href="usuarioagregar.php"><span class="mif-users icon fg-black" ></span> Usuarios</a></li>
+            <li><a href="usuariocontra.php"><span class="mif-user icon fg-black" ></span> Modificar mi contraseña</a></li>
             <li><a href="preguntasagregar.php"><span class="mif-question icon fg-black" ></span> Preguntas de seguridad</a></li>
+        </ul>
+    </li>
+    <?php } ?>
+    <?php if($_SESSION['tipo']==2){ ?>
+    <li class="stick bg-orange">
+        <a class="dropdown-toggle" href="#"><span class="mif-users icon fg-orange"></span> Usuario</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="usuariocontra.php"><span class="mif-user icon fg-black" ></span> Modificar mi contraseña</a></li>
         </ul>
     </li>
     <?php } ?>

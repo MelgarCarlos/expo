@@ -1,12 +1,9 @@
 <?php 
 include '../login/login.php';
 session_start();
-if(!verificar_usuario()){
-    if($_SESSION['tipo']!=1){
-    header("location: ../index.php");
-    }
+if(verificar_usuario()){
+    include '../login/tiempo.php';
 }
-include '../login/tiempo.php';
 ?>
 <!doctype html>
 <html>
@@ -14,7 +11,8 @@ include '../login/tiempo.php';
     <?php
     include 'librerias.php';
     ?>
-    <title>Agregar usuario</title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <title>Registrarse</title>
 </head>
 <body style="background-color: #fffff9;">
     <!----Validacion de contraseñas--->
@@ -39,8 +37,7 @@ include '../login/tiempo.php';
     }
     
     </script>
-    <div>
-        <div class="bg-grayLighter" style="overflow: hidden;">
+    
         <?php
         include '../login/conexion.php';
         $valor=1;
@@ -48,23 +45,26 @@ include '../login/tiempo.php';
 	if (isset($_POST["enviar_btn"]))
 	{ 
                 $guardaru=false;
-		if($_POST["tipo_sl"]=='Administrador')
-		{
-			$valor=1;
-		} else if($_POST["tipo_sl"]=='Empleado')
-		{
-			$valor=2;
-		} else if($_POST["tipo_sl"]=='Cliente')
-		{
-			$valor=3;
-		}
 		$usua=$_POST["usuario_txt"];
 		$password=$_POST["contrasenia_txt"];
                 $password2=$_POST["contrasenia2_txt"];
                 $mensaje="";
-                
+                $secret="6LefmSkTAAAAAKagEgIQL-B679zKp7kVT8a0bu-X";
+                // respuesta vacía
+                $response = null;
+                // coge la librería recaptcha
+                require_once "recaptchalib.php";
+                // comprueba la clave secreta
+                $reCaptcha = new ReCaptcha($secret);
+                if ($_POST["g-recaptcha-response"]) {
+                $response = $reCaptcha->verifyResponse(
+                        $_SERVER["REMOTE_ADDR"],
+                        $_POST["g-recaptcha-response"]
+                    );
+                }
+                if ($response != null && $response->success) {
                 if(strcmp($password, $password2)==0){
-                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',".$valor.",1)";
+                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',3,1)";
 		if(mysql_query($consulta,$conexion)){
                         $nombre=$_POST["nombre_txt"];
                         $apellido=$_POST["apellido_txt"];
@@ -75,28 +75,22 @@ include '../login/tiempo.php';
                                 . ",'".$correo."',".$pregunta.",'".$respuesta."')";
                         if(mysql_query($consulta,$conexion)){
                             $guardaru=true;
+                            header("location: login.php??".base64_encode("1"));
                         }
                 }
                 }else{
                     $mensaje=": Las contraseñas no coinciden";
                 }
+                }else{
+                    $mensaje=": verifique si que no es un robot";
+                }
+                
                 
 	}
 ?>
             <?php
     if(isset($_POST["enviar_btn"])){
-        if($guardaru==true){
-    ?>
-    <script>
-            $(document).ready(function() {
-                setTimeout(function(){
-                    $.Notify({keepOpen: true, type: 'success', caption: 'Mensaje', content: "Se guardo exitosamente"});
-                }, 150);
-            });
-    </script>
-    
-    <?php
-        }else{
+        if($guardaru==false){
             ?>
     <script>
             $(document).ready(function() {
@@ -108,30 +102,13 @@ include '../login/tiempo.php';
             <?php
         }
     }
-    include 'menu2.php';
+    include 'menu.php';
     ?>
-    
-    <table style="width: 60%;margin: 0px;padding: 0px;">
-        <tr>
-            <td style="width: 50%;padding-top:5px;">
-                <a href="usuarioagregar.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Agregar usuario</h5>
-                </a>
-            </td>
-            <td>&nbsp;&nbsp;</td>
-            <td style="width: 50%;padding-top:5px;">
-                <a href="usuariomanto.php">
-                <h5 class="align-center fg-blue" style="text-decoration: underline;padding-top: 10px;border-style: solid;border-width: 2px 1px 0px 1px;border-color: #990000;">Mantenimientos</h5>
-                </a>
-            </td>
-        </tr>
-    </table>
-        <div class="bg-grayLighter" style="margin: 0px;">
+    <div style="padding: 5% 8% 1% 8%;" >
         <center>
-            <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Agregar usuario</h4>
-        </center>
-        </div>
-        <form action="usuarioagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+            <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span class="icon mif-users"></span> Registrarme</h3>
+            </center>
+        <form action="registro.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Nombre</label>
                 <br>
@@ -153,8 +130,8 @@ include '../login/tiempo.php';
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Usuario</label>
                 <br>
-                <div style="width: 100%;" maxlength="40" autocomplete="off" class="input-control text" data-role="input" >
-                    <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" autocomplete="off">
+                <div style="width: 100%;" autocomplete="off" class="input-control text" data-role="input" >
+                    <input name="usuario_txt" type="text" maxlength="40" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -163,7 +140,7 @@ include '../login/tiempo.php';
                 <label> Email</label>
                 <br>
                 <div  style="width: 100%;" class="input-control text" data-role="input">
-                    <input name="email_txt" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido"  autocomplete="off">
+                    <input name="email_txt" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -182,7 +159,7 @@ include '../login/tiempo.php';
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
-                    <input name="contrasenia2_txt" maxlength="10" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
+                    <input name="contrasenia2_txt"  maxlength="10" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
                     <span class="input-state-error mif-warning"></span>
                 </div>
             </div>
@@ -212,32 +189,18 @@ include '../login/tiempo.php';
                 <label> Respuesta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="respuesta_txt"  maxlength="50" type="text"  autocomplete="off" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
+                    <input name="respuesta_txt"  maxlength="50" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Tipo</label>
-                <br>
-                <div class="input-control select" style="width:100%;">
-                    <select  name="tipo_sl" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
-                        <option value="">Seleccione una opción</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Empleado">Empleado</option>
-                        <option value="Cliente">Cliente</option>
-                    </select>
-                    <span class="mif-arrow-down prepend-icon"></span>
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
+            <div class="g-recaptcha" data-sitekey="6LefmSkTAAAAADQB6NbG0hnc6jtRzhd0Ax_2F54s"></div>
             </div>
-            
             <div style="padding: 1% 30% 1% 30%;">
                 <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
             </div>
         </form>
-    </div>
     </div>
     <?php
     include 'footer.php';

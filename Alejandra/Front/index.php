@@ -1,5 +1,9 @@
 <?php 
+include '../login/login.php';
 session_start();
+if(verificar_usuario()){
+    include '../login/tiempo.php';
+}
 ?>
 <!doctype html>
 <html>
@@ -16,7 +20,13 @@ session_start();
     ?>
     
     <div style="padding: 5% 8% 1% 8%;" >
-        <div>
+            <?php 
+            if(verificar_usuario()&&$_SESSION['tipo']==3){
+                ?>
+        
+             <?php   
+            }else{
+            ?>
             <center>
                 <h3 class="bg-grayLighter fg-black padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><img src="../img/logo/logo.png" style="width: 20%;"> Trazos Digitales - Bienvenido</h3>
             </center>
@@ -66,8 +76,6 @@ session_start();
                     </div>
                 </div>
             </div>
-        </div>
-        
                 <?php 
                             include '../login/conexion.php'; 
                             $sql="select * from servicios limit 3";
@@ -102,7 +110,7 @@ session_start();
             </div>
         </div>
             <?php
-                            } ?>
+            }} ?>
             
     </div>
     <?php
