@@ -9,7 +9,12 @@
                     ?>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="index.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-barcode"></span> Productos</a></li>
             <?php
-            }}else{
+            }else{
+                ?>
+            <li style="padding-right: 5px;padding-left: 5px;"><a href="index.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-home"></span> Inicio</a></li>
+            <?php
+            }
+            }else{
             ?>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="index.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-home"></span> Inicio</a></li>
             <?php

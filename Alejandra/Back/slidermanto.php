@@ -67,16 +67,6 @@ include '../login/tiempo.php';
                          <input name="image" type="hidden" value="<?=$path.$current?>">
                          <div class="button bg-red fg-white" onclick="showDialog('eliminar_form')"><span style="padding-bottom: 5px;" class="mif-cancel"></span></div>
                      </td>
-                     <script>
-                        function showDialog(id){
-                            var dialog = $("#"+id).data('dialog');
-                            if (!dialog.element.data('opened')) {
-                                dialog.open();
-                            } else {
-                                dialog.close();
-                            }
-                        }
-                    </script>
                     <div data-role="dialog" id="eliminar_form" data-hide="2000" class="padding20" data-close-button="true">
                         <h3>¿Esta seguro que desea eliminar?</h3>
                         <button name="eliminar_btn" class="button alert">Si</button>
@@ -100,6 +90,16 @@ include '../login/tiempo.php';
                 <?php } ?>
                 </tbody>
             </table>
+                     <script>
+                        function showDialog(id){
+                            var dialog = $("#"+id).data('dialog');
+                            if (!dialog.element.data('opened')) {
+                                dialog.open();
+                            } else {
+                                dialog.close();
+                            }
+                        }
+                    </script>
         </div>
 </body>
 </html>

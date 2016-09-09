@@ -174,16 +174,6 @@ include '../login/tiempo.php';
                 <form action="productosmanto.php" method="post">
                     <td><span class="button icon mif-cancel bg-red fg-white" onclick="showDialog('eliminar_form')"></span></td>
                     <input name="codigo" type="hidden" value="<?=$row[0]?>">
-                    <script>
-                        function showDialog(id){
-                            var dialog = $("#"+id).data('dialog');
-                            if (!dialog.element.data('opened')) {
-                                dialog.open();
-                            } else {
-                                dialog.close();
-                            }
-                        }
-                    </script>
                     <div data-role="dialog" id="eliminar_form" data-hide="2000" class="padding20" data-close-button="true">
                         <h3>¿Esta seguro que desea desactivar este producto?</h3>
                         <button name="eliminar_btn" class="button alert">Si</button>
@@ -194,6 +184,16 @@ include '../login/tiempo.php';
                     <?php }} ?>
                 </tbody>
             </table>
+                    <script>
+                        function showDialog(id){
+                            var dialog = $("#"+id).data('dialog');
+                            if (!dialog.element.data('opened')) {
+                                dialog.open();
+                            } else {
+                                dialog.close();
+                            }
+                        }
+                    </script>
         </div>
 </body>
 </html>
