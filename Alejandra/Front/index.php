@@ -69,7 +69,7 @@ if(verificar_usuario()){
                 </div>
                 <div class="place-right" style="width: 100%;padding-bottom: 2%;">
                     <div style="padding: 1% 2% 0 2%;line-height: 18px;">
-                        <h2>EL EQUIPAMIENTO MÁS COMPLETO</h2>
+                        <h2>MILAGRO PRUEBA</h2>
                         <p class="align-justify" style="margin: 0;padding: 0;">
                 Estamos comprometidos a ofrecer siempre lo mejor a buen precio,  calidad, rapidez, precios competitivos y atención personalizada, además brindarles  asesoría en cuanto a lo que usted necesita. Sabemos que el mercado demanda de muchos productos innovadores, por lo que nosotros nos sujetamos a esas demandas, ofreciéndole herramientas publicitarias  para promover su empresa o institución.
                         </p>
