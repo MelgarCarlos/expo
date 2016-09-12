@@ -62,6 +62,7 @@ if(verificar_usuario()){
                         $_POST["g-recaptcha-response"]
                     );
                 }
+                if(strmcp($usua,$password)==0){
                 if ($response != null && $response->success) {
                 if(strcmp($password, $password2)==0){
                     $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',3,1)";
@@ -84,7 +85,9 @@ if(verificar_usuario()){
                 }else{
                     $mensaje=": verifique si que no es un robot";
                 }
-                
+                }else{
+                    $mensaje=": La contraseña tiene que ser diferente al usuario";
+                }
                 
 	}
 ?>

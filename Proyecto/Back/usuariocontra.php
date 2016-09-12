@@ -50,7 +50,16 @@ include '../login/tiempo.php';
 		$password=$_POST["contrasenia_txt"];
                 $password2=$_POST["contrasenia2_txt"];
                 $mensaje="";
-                
+                if(strcmp($_SESSION['user'],$password)!=0){
+                    $sql="select contrasena from usuario where usuario='".$_SESSION['user']."'";
+                            $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                            $numRegistros=mysql_num_rows($consulta);
+                            if($numRegistros>0) {
+                            while($row=mysql_fetch_array($consulta)){
+                               $contra=$row[0]; 
+                            }
+                            }
+            if(strcmp($contra, md5($password))!=0){
                 if(strcmp($password, $password2)==0){
                     $consulta="update usuario set contrasena='".md5($password)."' where usuario='".$_SESSION['user']."'";
 		if(mysql_query($consulta,$conexion)){
@@ -58,6 +67,12 @@ include '../login/tiempo.php';
                 }
                 }else{
                     $mensaje=": Las contraseñas no coinciden";
+                }
+                }else{
+                    $mensaje=": Las contraseña no debe ser igual a la anterior";
+                }
+                }else{
+                    $mensaje=": Las contraseña no debe ser igual al usuario";
                 }
                 
 	}

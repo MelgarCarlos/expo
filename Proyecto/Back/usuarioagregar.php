@@ -62,7 +62,7 @@ include '../login/tiempo.php';
 		$password=$_POST["contrasenia_txt"];
                 $password2=$_POST["contrasenia2_txt"];
                 $mensaje="";
-                
+                if(strcmp($usua, $password)){
                 if(strcmp($password, $password2)==0){
                     $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',".$valor.",1)";
 		if(mysql_query($consulta,$conexion)){
@@ -80,7 +80,9 @@ include '../login/tiempo.php';
                 }else{
                     $mensaje=": Las contraseñas no coinciden";
                 }
-                
+                }else{
+                    $mensaje=": La contraseña debe ser diferente al usuario";
+                }
 	}
 ?>
             <?php
