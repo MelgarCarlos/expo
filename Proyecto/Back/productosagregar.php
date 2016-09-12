@@ -98,7 +98,7 @@ include '../login/tiempo.php';
                 <label> Id</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="id_txt"  maxlength="11" type="text" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id del servicio(solo numeros)">
+                    <input name="id_txt"  maxlength="11"  autocomplete="off"  type="text" data-validate-func="pattern" data-validate-arg="^[0-9]+$" placeholder="Id" data-validate-hint="Llene el id del servicio(solo numeros)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -107,7 +107,7 @@ include '../login/tiempo.php';
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="titulo_txt"  maxlength="40" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
+                    <input name="titulo_txt"  maxlength="40" autocomplete="off"  type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>

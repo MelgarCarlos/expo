@@ -87,7 +87,7 @@ if(verificar_usuario()){
             <br />
             <div style="padding:2% 10% 2% 10%;">
                 <div class="input-control modern text iconic" data-role="input" style="width: 100%;">
-                    <input name="user_login" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$"  data-validate-hint="Llene el campo usuario con el formato valido" autocomplete="off" maxlength="40" <?php if($var==0){?> value="<?=$user?>" <?php } ?> >
+                    <input name="user_login" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$"  data-validate-hint="Llene el campo usuario con el formato valido" autocomplete="off" maxlength="40" <?php if($var==0){?> value="<?=$user?>" <?php } ?> >
                 <span class="label">Usuario</span>
                 <span class="informer">Ingrese su usuario</span>
                 <span class="placeholder">Usuario</span>

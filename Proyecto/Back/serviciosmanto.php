@@ -87,7 +87,7 @@ include '../login/tiempo.php';
                 <label>Titulo</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="titulo_txt" maxlength="30" value="<?=$_POST['titulo']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
+                    <input name="titulo_txt"  autocomplete="off"  maxlength="30" value="<?=$_POST['titulo']?>" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -176,16 +176,6 @@ include '../login/tiempo.php';
                 <form action="serviciosmanto.php" method="post">
                     <td><span class="button icon mif-cancel bg-red fg-white" onclick="showDialog('eliminar_form')"></span></td>
                     <input name="codigo" type="hidden" value="<?=$row[0]?>">
-                    <script>
-                        function showDialog(id){
-                            var dialog = $("#"+id).data('dialog');
-                            if (!dialog.element.data('opened')) {
-                                dialog.open();
-                            } else {
-                                dialog.close();
-                            }
-                        }
-                    </script>
                     <div data-role="dialog" id="eliminar_form" data-hide="2000" class="padding20" data-close-button="true">
                         <h3>¿Esta seguro que desea eliminar?</h3>
                         <button name="eliminar_btn" class="button alert">Si</button>
@@ -196,6 +186,16 @@ include '../login/tiempo.php';
                     <?php }} ?>
                 </tbody>
             </table>
+                    <script>
+                        function showDialog(id){
+                            var dialog = $("#"+id).data('dialog');
+                            if (!dialog.element.data('opened')) {
+                                dialog.open();
+                            } else {
+                                dialog.close();
+                            }
+                        }
+                    </script>
         </div>
 </body>
 </html>

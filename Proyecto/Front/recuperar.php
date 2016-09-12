@@ -14,12 +14,143 @@ if(verificar_usuario()){
     <title>Recuperar contraseña</title>
 </head>
 <body style="background-color: #fffff9;">
-    
     <?php
     include 'menu.php';
     if(isset($_POST['modificar_btn'])){
+    if(strcmp($_POST['usuario'],$_POST['contrasenia_txt'])==0){
+       ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "La contraseña debe de ser diferente al nombre de usuario"});
+                }, 150);
+            });
+    </script>
+    <!----Validacion de contraseñas--->
+    <script>
+    var validacion = false;
+	function myFunction() {
+            var elemento = document.querySelector('#Pass2');
+    var PS1 = document.getElementById("Pass1").value;
+    var PS2 = document.getElementById("Pass2").value;
+    elemento.setAttribute("data-validate-arg", "["+PS1+"]");
+    if (PS1 != PS2) {
+        document.getElementById("Pass1").style.borderColor = "#E34234";
+        document.getElementById("Pass2").style.borderColor = "#E34234";
+		validacion = false;
+    }
+    else {
+	document.getElementById("Pass1").style.borderColor = "#0CDE01";
+        document.getElementById("Pass2").style.borderColor = "#0CDE01";
+		validacion = true;
+    }
+    
+    }
+    
+    </script>
+    <div style="padding: 8% 8% 15% 8%;" >
+        <form action="recuperar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        <center>
+            <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span class="icon mif-lock"></span> Recuperar contraseña</h3>
+        </center>
+        <div style="padding: 1% 30% 1% 30%;">
+            <input type="hidden" name="usuario" value="<?=$_POST['usuario']?>">
+                <label> Contraseña</label>
+                <br>
+                <div class="input-control text" style="width:100%;">
+                    <span class="mif-lock prepend-icon"></span>
+                    <input name="contrasenia_txt"  maxlength="10" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
+                    <span class="input-state-error mif-warning"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <label> Repetir Contraseña</label>
+                <br>
+                <div class="input-control text" style="width:100%;">
+                    <span class="mif-lock prepend-icon"></span>
+                    <input name="contrasenia_txt2" maxlength="10" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
+                    <span class="input-state-error mif-warning"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <button name="modificar_btn" class="button fg-white bg-darkBlue text-shadow"> Modificar contraseña</button>
+        </div>
+        </form>
+    </div>
+    <?php 
+    }else{
+    $sql="select contrasena from usuario where usuario='".$_POST['usuario']."'";
+                            $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                            $numRegistros=mysql_num_rows($consulta);
+                            if($numRegistros>0) {
+                            while($row=mysql_fetch_array($consulta)){
+                               $contra=$row[0]; 
+                            }
+                            }
+            if(strcmp($contra, md5($_POST['contrasenia_txt']))==0){
+                ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "La contraseña ingresada es igual a la anterior, intenta con una nueva"});
+                }, 150);
+            });
+    </script>
+    <!----Validacion de contraseñas--->
+    <script>
+    var validacion = false;
+	function myFunction() {
+            var elemento = document.querySelector('#Pass2');
+    var PS1 = document.getElementById("Pass1").value;
+    var PS2 = document.getElementById("Pass2").value;
+    elemento.setAttribute("data-validate-arg", "["+PS1+"]");
+    if (PS1 != PS2) {
+        document.getElementById("Pass1").style.borderColor = "#E34234";
+        document.getElementById("Pass2").style.borderColor = "#E34234";
+		validacion = false;
+    }
+    else {
+	document.getElementById("Pass1").style.borderColor = "#0CDE01";
+        document.getElementById("Pass2").style.borderColor = "#0CDE01";
+		validacion = true;
+    }
+    
+    }
+    
+    </script>
+    <div style="padding: 8% 8% 15% 8%;" >
+        <form action="recuperar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+        <center>
+            <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span class="icon mif-lock"></span> Recuperar contraseña</h3>
+        </center>
+        <div style="padding: 1% 30% 1% 30%;">
+            <input type="hidden" name="usuario" value="<?=$_POST['usuario']?>">
+                <label> Contraseña</label>
+                <br>
+                <div class="input-control text" style="width:100%;">
+                    <span class="mif-lock prepend-icon"></span>
+                    <input name="contrasenia_txt"  maxlength="10" id="Pass1" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9]){6,10}" placeholder="Contraseña" data-validate-hint="Llene el campo contraseña (solo digitos min:6 max:10)" maxlength="10">
+                    <span class="input-state-error mif-warning"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <label> Repetir Contraseña</label>
+                <br>
+                <div class="input-control text" style="width:100%;">
+                    <span class="mif-lock prepend-icon"></span>
+                    <input name="contrasenia_txt2" maxlength="10" id="Pass2" onkeyup="myFunction()" type="password" data-validate-func="pattern" data-validate-arg="" placeholder="Contraseña" data-validate-hint="Las contraseñas no coinciden" maxlength="10">
+                    <span class="input-state-error mif-warning"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <button name="modificar_btn" class="button fg-white bg-darkBlue text-shadow"> Modificar contraseña</button>
+        </div>
+        </form>
+    </div>
+    <?php
+            }else{
             include '../login/conexion.php';
-            $consulta="update usuario set contrasena='".  md5($_POST['contrasenia_txt'])."' where usuario='".$_POST['usuario']."'";
+            $consulta="update usuario set contrasena='".  md5($_POST['contrasenia_txt'])."' where usuario='".$_POST['usuario']."'  and usuario_info.pregunta=preguntas.id";
                         if(mysql_query($consulta,$conexion)){
                            ?>
     <script>
@@ -30,7 +161,9 @@ if(verificar_usuario()){
             });
     </script>
     <?php
-                        }
+        }
+        }
+        }
         ?>
     
     <div style="padding: 8% 8% 15% 8%;" >

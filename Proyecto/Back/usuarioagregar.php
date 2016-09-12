@@ -62,7 +62,7 @@ include '../login/tiempo.php';
 		$password=$_POST["contrasenia_txt"];
                 $password2=$_POST["contrasenia2_txt"];
                 $mensaje="";
-                
+                if(strcmp($usua, $password)){
                 if(strcmp($password, $password2)==0){
                     $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',".$valor.",1)";
 		if(mysql_query($consulta,$conexion)){
@@ -80,7 +80,9 @@ include '../login/tiempo.php';
                 }else{
                     $mensaje=": Las contraseñas no coinciden";
                 }
-                
+                }else{
+                    $mensaje=": La contraseña debe ser diferente al usuario";
+                }
 	}
 ?>
             <?php
@@ -136,7 +138,7 @@ include '../login/tiempo.php';
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="nombre_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
+                    <input name="nombre_txt" autocomplete="off" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -145,7 +147,7 @@ include '../login/tiempo.php';
                 <label> Apellido</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="apellido_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
+                    <input name="apellido_txt" autocomplete="off"  maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
