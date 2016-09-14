@@ -59,9 +59,10 @@ include '../login/tiempo.php';
                                $contra=$row[0]; 
                             }
                             }
-            if(strcmp($contra, md5($password))!=0){
+            include '../login/encriptar.php';
+            if(strcmp($contra, encriptar(md5($password)))!=0){
                 if(strcmp($password, $password2)==0){
-                    $consulta="update usuario set contrasena='".md5($password)."' where usuario='".$_SESSION['user']."'";
+                    $consulta="update usuario set contrasena='".  encriptar(md5($password))."' where usuario='".$_SESSION['user']."'";
 		if(mysql_query($consulta,$conexion)){
                             $guardaru=true;
                 }

@@ -4,7 +4,8 @@
 		$pass= isset($_POST['user_password'])? $_POST['user_password'] :null;
 		include 'conexion.php';
 		if(isset($_POST['user_login']) && isset($_POST['user_password'])) {
-		    $sql="SELECT tipo,estado FROM usuario WHERE usuario='".$usuario."' AND contrasena='".md5($pass)."'";
+                    include '../login/encriptar.php';
+		    $sql="SELECT tipo,estado FROM usuario WHERE usuario='".$usuario."' AND contrasena='".  encriptar(md5($pass))."'";
                     $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
 		    $resultado=mysql_fetch_array($consulta);
 		    $numRegistros=mysql_num_rows($consulta);

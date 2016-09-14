@@ -7,7 +7,7 @@ tipo smallint(1),
 estado smallint(1)
 )engine=innoDB;
 
-insert into usuario values('admin','e10adc3949ba59abbe56e057f20f883e',1,1);---contraseña: 123456
+insert into usuario values('admin','VTPOw1qKNOzRbz8RdEZyKyEkuLrZqixjU8fbt7iV70c=',1,1);---contraseña: 123456
 
 create table preguntas(
 id int primary key not null,
@@ -51,6 +51,8 @@ create table productos(
 id int primary key,
 nombre varchar(40),
 descripcion varchar(200),
+precio_n float,
+precio_v float,
 dir varchar(400),
 estado smallint(1)
 )

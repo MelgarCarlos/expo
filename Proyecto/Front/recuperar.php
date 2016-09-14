@@ -55,7 +55,7 @@ if(verificar_usuario()){
         </center>
         <div style="padding: 1% 30% 1% 30%;">
             <input type="hidden" name="usuario" value="<?=$_POST['usuario']?>">
-                <label> Contraseña</label>
+                <label> Contraseña nueva</label>
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
@@ -64,7 +64,7 @@ if(verificar_usuario()){
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Repetir Contraseña</label>
+                <label> Repetir Contraseña nueva</label>
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
@@ -87,7 +87,8 @@ if(verificar_usuario()){
                                $contra=$row[0]; 
                             }
                             }
-            if(strcmp($contra, md5($_POST['contrasenia_txt']))==0){
+                            include '../login/encriptar.php';
+            if(strcmp($contra, encriptar(md5($_POST['contrasenia_txt'])))==0){
                 ?>
     <script>
             $(document).ready(function() {
@@ -125,7 +126,7 @@ if(verificar_usuario()){
         </center>
         <div style="padding: 1% 30% 1% 30%;">
             <input type="hidden" name="usuario" value="<?=$_POST['usuario']?>">
-                <label> Contraseña</label>
+                <label> Contraseña nueva</label>
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
@@ -134,7 +135,7 @@ if(verificar_usuario()){
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Repetir Contraseña</label>
+                <label> Repetir Contraseña nueva</label>
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
@@ -150,7 +151,8 @@ if(verificar_usuario()){
     <?php
             }else{
             include '../login/conexion.php';
-            $consulta="update usuario set contrasena='".  md5($_POST['contrasenia_txt'])."' where usuario='".$_POST['usuario']."'  and usuario_info.pregunta=preguntas.id";
+            
+            $consulta="update usuario set contrasena='". encriptar(md5($_POST['contrasenia_txt']))."' where usuario='".$_POST['usuario']."' ";
                         if(mysql_query($consulta,$conexion)){
                            ?>
     <script>
@@ -225,7 +227,7 @@ if(verificar_usuario()){
         </center>
         <div style="padding: 1% 30% 1% 30%;">
             <input type="hidden" name="usuario" value="<?=$_POST['usuario_txt']?>">
-                <label> Contraseña</label>
+                <label> Contraseña nueva</label>
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
@@ -234,7 +236,7 @@ if(verificar_usuario()){
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Repetir Contraseña</label>
+                <label> Repetir Contraseña nueva</label>
                 <br>
                 <div class="input-control text" style="width:100%;">
                     <span class="mif-lock prepend-icon"></span>
@@ -370,7 +372,7 @@ if(verificar_usuario()){
     if(isset($_POST['comprobar_btn'])){
     $usuario = isset($_POST['usuario_txt']) ? $_POST['usuario_txt'] :null;
     include '../login/conexion.php';
-        $sql="select preguntas.pregunta,usuario_info.respuesta,usuario_info.correo from usuario_info,preguntas where usuario_info.usuario='".$usuario."'";
+        $sql="select preguntas.pregunta,usuario_info.respuesta,usuario_info.correo from usuario_info,preguntas where usuario_info.usuario='".$usuario."' and preguntas.id=usuario_info.pregunta";
         $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
         $resultado=mysql_fetch_array($consulta);
         $numRegistros=mysql_num_rows($consulta);
@@ -454,6 +456,29 @@ if(verificar_usuario()){
         </form>
     </div>
     <?php
+        }else{
+            ?>
+    <div style="padding: 8% 8% 15% 8%;" >
+        <center>
+            <h3 class="bg-lightOlive fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span class="icon mif-lock"></span> Recuperar contraseña</h3>
+        </center>
+        <form action="recuperar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+            <div style="padding: 2% 30% 1% 30%;">
+                <label> Usuario</label>
+                <br>
+                <div style="width: 100%;" autocomplete="off" class="input-control text" data-role="input" >
+                    <input name="usuario_txt" autocomplete="off" maxlength="40" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <button name="comprobar_btn" class="button success block-shadow-success text-shadow"> Comprobar</button>
+            </div>
+        </form>
+    </div>
+    <?php
+            
         }
     }
     if(!($_POST)){

@@ -65,7 +65,8 @@ if(verificar_usuario()){
                 if(strmcp($usua,$password)==0){
                 if ($response != null && $response->success) {
                 if(strcmp($password, $password2)==0){
-                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',3,1)";
+                    include '../login/encriptar.php';
+                    $consulta="INSERT INTO usuario VALUES('".$usua."','".  encriptar(md5($password))."',3,1)";
 		if(mysql_query($consulta,$conexion)){
                         $nombre=$_POST["nombre_txt"];
                         $apellido=$_POST["apellido_txt"];

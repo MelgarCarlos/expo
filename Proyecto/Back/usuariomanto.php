@@ -197,21 +197,21 @@ include '../login/tiempo.php';
                     </td>
                     <td><button name="modificarbtn" class="button icon mif-pencil bg-darkBlue fg-white"></button></td>
                 </form>
-                <form action="usuariomanto.php" method="post">
+                
                     <td><span class="button icon mif-cancel bg-red fg-white" onclick="showDialog('eliminar_form')"></span></td>
-                    <input name="usuario" type="hidden" value="<?=$row[0]?>">
-                    
                     <div data-role="dialog" id="eliminar_form" data-hide="2000" class="padding20" data-close-button="true">
+                        <form action="usuariomanto.php" method="post">
+                        <input name="usuario" type="hidden" value="<?=$row[0]?>">
                         <h3>¿Esta seguro que desea eliminar?</h3>
                         <button name="eliminar_btn" class="button alert">Si</button>
+                        </form>
                     </div>
-                </form>
+                
                 </tr>
                 
                                 <?php }}} ?>
                 </tbody>
-            </table>
-    <script>
+                <script>
                         function showDialog(id){
                             var dialog = $("#"+id).data('dialog');
                             if (!dialog.element.data('opened')) {
@@ -221,6 +221,8 @@ include '../login/tiempo.php';
                             }
                         }
                     </script>
+            </table>
+    
         </div>
 </body>
 </html>

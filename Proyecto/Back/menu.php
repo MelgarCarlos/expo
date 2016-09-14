@@ -1,4 +1,4 @@
-<ul class="sidebar2" style="height: 750px;padding-left: 10px;">
+<ul class="sidebar2" style="height: 850px;padding-left: 10px;">
     <li class="title" style="line-height: 28px;text-align: center;">Panel administrativo</li>
     <hr>
     <li class="stick bg-blue"><a href="admin.php"><span class="mif-home icon fg-blue" ></span> Inicio</a></li>
