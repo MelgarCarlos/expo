@@ -16,14 +16,144 @@ if(verificar_usuario()){
 <body style="background-color: #fffff9;">
     
     <?php
+    if(isset($_POST['comprar_btn'])){
+        include '../login/conexion.php';
+        $sql="SELECT COUNT(*) FROM `detalle_pedido` WHERE `detalles`='".$_POST['descripcion_txt']."' and `cantidad`=".$_POST['cantidad_txt']." and `pedido`='".$_SESSION['carretilla']."' and `producto`='".$_POST['id_txt']."'";
+                                    $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                                    $row=mysql_fetch_array($consulta);
+                                    $cantidad=$row[0];
+                                    if(!($cantidad>0)){
+         $consulta="INSERT INTO `detalle_pedido`(`pedido`, `producto`, `cantidad`, `detalles`) VALUES ('".$_SESSION['carretilla']."','".$_POST['id_txt']."',".$_POST['cantidad_txt'].",'".$_POST['descripcion_txt']."')";
+                if(mysql_query($consulta,$conexion)){
+                    $consulta="UPDATE `pedido` SET `total`=(select sum(productos.precio_v*detalle_pedido.cantidad) from detalle_pedido,productos WHERE detalle_pedido.producto=productos.id and detalle_pedido.pedido='".$_SESSION['carretilla']."') WHERE id='".$_SESSION['carretilla']."'";
+                if(mysql_query($consulta,$conexion)){
+                    ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'success', caption: 'Mensaje', content: "Se añadio al carrito exitosamente"});
+                }, 150);
+            });
+    </script>
+                <?php
+                }
+                }
+                }else{
+                    ?>
+    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Ya se realizo un pedido con dichas indicaciones y misma cantidad de este producto"});
+                }, 150);
+            });
+    </script>
+                <?php
+                }
+    }
     include 'menu.php';
     ?>
     
-    <div style="padding: 5% 8% 1% 8%;" >
+    <div style="padding: 5% 8% 5% 8%;" >
             <?php 
             if(verificar_usuario()&&$_SESSION['tipo']==3){
                 ?>
-        
+            <center>
+            <h3 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span class="icon mif-barcode"></span> Productos a tu disposición</h3>
+            </center>   
+        <?php if(isset($_POST['modificarbtn'])){ ?>
+        <form action="index.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000" enctype="multipart/form-data">
+        <input name="id_txt" value="<?=$_POST['codigo']?>" type="hidden">
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Nombre</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="titulo_txt"  autocomplete="off"  value="<?=$_POST['titulo']?>"  maxlength="40" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Titulo" data-validate-hint="Llene el campo del tipo(solo letras)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Precio de venta</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="precioventa_txt" value="<?=$_POST['precioventa']?>"  maxlength="12"  type="text" data-validate-func="pattern" data-validate-arg="^\d+(\.\d{1,2})?$" placeholder="Precio de venta" data-validate-hint="Llene el campo del precio(solo decimales)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Instrucciones de compra </label>
+                <br>
+                <label> (detalla como deseas tu producto) </label>
+                <br>
+                <div style="width: 100%;" class="input-control textarea" data-role="input" >
+                    <textarea style="resize:none;" maxlength="300" name="descripcion_txt" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Descripción" data-validate-hint="Llene el campo de descripciòn(solo letras)"></textarea>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Cantidad a comprar</label>
+                <br>
+                <div class="input-control select" style="width:100%;">
+                    <select  name="cantidad_txt" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
+                        <?php
+                        for($j=1;$j<=10;$j++){
+                            ?>
+                        <option value="<?=$j?>"><?=$j?></option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                    <span class="mif-arrow-down prepend-icon"></span>
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+            <div style="padding: 1% 30% 1% 30%;alignment-adjust: central;">
+                <label> Imagen ilustrativa:</label>
+                <br><br>
+                <img src="<?=$_POST['imagen']?>" style="width: 50%;">
+            </div>
+            <div style="padding: 1% 30% 1% 30%;">
+                <button name="comprar_btn" class="button fg-white bg-orange block-shadow-success text-shadow">Comprar <span class="icon mif-cart"></span></button>
+            </div>
+        </form>
+        <?php } ?>
+    <table class="dataTable border bordered hovered" data-role="datatable" data-searching="true">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Imagen</th>
+                    <th>Comprar</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                            include '../login/conexion.php'; 
+                            $sql="select * from productos where estado=1";
+                            $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
+                            $numRegistros=mysql_num_rows($consulta);
+                            if($numRegistros>0) {
+                            while($row=mysql_fetch_array($consulta)){
+                            ?>
+                
+                <tr>
+                <form action="index.php" method="post">
+                    <input type="hidden" name="codigo" value="<?=$row[0]?>" readonly="">
+                    <td><?=$row[1]?><input name="titulo" type="hidden" value="<?=$row[1]?>"></td>
+                    <td><?=$row[2]?><input name="descripcion" type="hidden" value="<?=$row[2]?>"></td>
+                    <td><?=$row[4]?><input name="precioventa" type="hidden" value="<?=$row[4]?>"></td>
+                    <td style="width: 40%;"><img src="<?=$row[5]?>"><input name="imagen" type="hidden" value="<?=$row[5]?>"></td>
+                    <td><button name="modificarbtn" class="button icon mif-cart bg-darkOrange fg-white"> Comprar</button></td>
+                </form>
+                </tr>
+                
+                    <?php }} ?>
+                </tbody>
+            </table>
              <?php   
             }else{
             ?>

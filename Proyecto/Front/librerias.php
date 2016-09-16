@@ -14,3 +14,4 @@
     
     <script src="../js/jquery-2.1.3.min.js"></script>
     <script src="../js/metro.js"></script>
+    <script src="../js/jquery.dataTables.min2.js"></script>

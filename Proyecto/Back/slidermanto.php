@@ -89,8 +89,7 @@ include '../login/tiempo.php';
                 </tr>
                 <?php } ?>
                 </tbody>
-            </table>
-                     <script>
+                <script>
                         function showDialog(id){
                             var dialog = $("#"+id).data('dialog');
                             if (!dialog.element.data('opened')) {
@@ -100,6 +99,8 @@ include '../login/tiempo.php';
                             }
                         }
                     </script>
+            </table>
+                     
         </div>
 </body>
 </html>

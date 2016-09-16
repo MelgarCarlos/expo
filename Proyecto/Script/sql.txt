@@ -7,7 +7,7 @@ tipo smallint(1),
 estado smallint(1)
 )engine=innoDB;
 
-insert into usuario values('Admin','e10adc3949ba59abbe56e057f20f883e',1,1);---contraseña: 123456
+insert into usuario values('admin','8hkrGUDsHeG344bxPd0ynDGwsUpNQ7Mh7eoCVyi4je8=',1,1);---contraseña: 123456
 
 create table preguntas(
 id int primary key not null,
@@ -51,13 +51,15 @@ create table productos(
 id int primary key,
 nombre varchar(40),
 descripcion varchar(200),
+precio_n float,
+precio_v float,
 dir varchar(400),
 estado smallint(1)
 )
 
 create table pedido(
 id int AUTO_INCREMENT primary key,
-fecha date,
+fecha datetime,
 total double,
 estado smallint(1),
 usuario varchar(40),
@@ -68,6 +70,7 @@ create table detalle_pedido(
 pedido int,
 producto int,
 cantidad int,
+detalles varchar(300),
 foreign key (pedido) references pedido(id),
 foreign key (producto) references productos(id)
 )

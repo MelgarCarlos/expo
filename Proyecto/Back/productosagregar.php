@@ -27,6 +27,8 @@ include '../login/tiempo.php';
 		$id=$_POST["id_txt"];
 		$ti=$_POST["titulo_txt"];
                 $des=$_POST["descripcion_txt"];
+                $prep=$_POST["precio_txt"];
+                $prev=$_POST["precioventa_txt"];
                 $nombre="img_pro_".$id.".png";
                 $dir_subida = '../img/productos/';
                 $fichero_subido = $dir_subida .$nombre;
@@ -36,7 +38,7 @@ include '../login/tiempo.php';
                     $guardaru=false;
                 }
                 
-		$consulta="INSERT INTO productos VALUES(".$id.",'".$ti."','".$des."','".$fichero_subido."',1)";
+		$consulta="INSERT INTO productos VALUES(".$id.",'".$ti."','".$des."',".$prep.",".$prev.",'".$fichero_subido."',1)";
                 if(mysql_query($consulta,$conexion)){
                     $guardaru=true;
                 }else{
@@ -120,7 +122,25 @@ include '../login/tiempo.php';
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
-            </div>        
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Precio de produccion</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="precio_txt"  maxlength="12"  type="text" data-validate-func="pattern" data-validate-arg="^\d+(\.\d{1,2})?$" placeholder="Precio de produccion" data-validate-hint="Llene el campo del precio(solo decimales)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Precio de venta</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="precioventa_txt"  maxlength="12"  type="text" data-validate-func="pattern" data-validate-arg="^\d+(\.\d{1,2})?$" placeholder="Precio de venta" data-validate-hint="Llene el campo del precio(solo decimales)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
         <div style="padding: 1% 30% 1% 30%;alignment-adjust: central;">
                 <label> Imagen por agregar:</label>
                 <br><br>

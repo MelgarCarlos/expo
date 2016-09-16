@@ -62,10 +62,11 @@ if(verificar_usuario()){
                         $_POST["g-recaptcha-response"]
                     );
                 }
-                if(strmcp($usua,$password)==0){
+                if(strcmp($usua,$password)!=0){
                 if ($response != null && $response->success) {
                 if(strcmp($password, $password2)==0){
-                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',3,1)";
+                    include '../login/encriptar.php';
+                    $consulta="INSERT INTO usuario VALUES('".$usua."','".  encriptar(md5($password))."',3,1)";
 		if(mysql_query($consulta,$conexion)){
                         $nombre=$_POST["nombre_txt"];
                         $apellido=$_POST["apellido_txt"];
@@ -116,7 +117,7 @@ if(verificar_usuario()){
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="nombre_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
+                    <input name="nombre_txt" autocomplete="off" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -125,7 +126,7 @@ if(verificar_usuario()){
                 <label> Apellido</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="apellido_txt" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
+                    <input name="apellido_txt" autocomplete="off"  maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -134,7 +135,7 @@ if(verificar_usuario()){
                 <label> Usuario</label>
                 <br>
                 <div style="width: 100%;" autocomplete="off" class="input-control text" data-role="input" >
-                    <input name="usuario_txt" type="text" maxlength="40" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
+                    <input name="usuario_txt" autocomplete="off"  type="text" maxlength="40" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -143,7 +144,7 @@ if(verificar_usuario()){
                 <label> Email</label>
                 <br>
                 <div  style="width: 100%;" class="input-control text" data-role="input">
-                    <input name="email_txt" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
+                    <input name="email_txt" autocomplete="off"  maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -192,7 +193,7 @@ if(verificar_usuario()){
                 <label> Respuesta</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="respuesta_txt"  maxlength="50" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
+                    <input name="respuesta_txt" autocomplete="off"   maxlength="50" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z0-9 ,.ñ])+$" placeholder="Respuesta" data-validate-hint="Llene el campo de respuesta(solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>

@@ -1,12 +1,9 @@
 <?php 
 include '../login/login.php';
 session_start();
-if(!verificar_usuario()){
-    if($_SESSION['tipo']!=1){
-    header("location: ../index.php");
-    }
+if(verificar_usuario()){
+    include '../login/tiempo.php';
 }
-include '../login/tiempo.php';
 ?>
 <!doctype html>
 <html>
@@ -39,8 +36,6 @@ include '../login/tiempo.php';
     }
     
     </script>
-    <div>
-        <div class="bg-grayLighter" style="overflow: hidden;">
         <?php
         include '../login/conexion.php';
         $guardaru=null;
@@ -103,13 +98,12 @@ include '../login/tiempo.php';
             <?php
         }
     }
-    include 'menu2.php';
+    include 'menu.php';
     ?>
-        <div class="bg-grayLighter" style="margin: 0px;">
+        <div style="padding: 5% 8% 15% 8%;" >
         <center>
             <h4 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-users" ></span> Modificar mi contraseña (usuario: <?=$_SESSION['user']?>)</h4>
         </center>
-        </div>
     <form action="usuariocontra.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Contraseña</label>
@@ -133,7 +127,6 @@ include '../login/tiempo.php';
                 <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
             </div>
         </form>
-    </div>
     </div>
     <?php
     include 'footer.php';

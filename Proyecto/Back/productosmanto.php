@@ -49,6 +49,8 @@ include '../login/tiempo.php';
 		$id=$_POST["id_txt"];
 		$ti=$_POST["titulo_txt"];
                 $des=$_POST["descripcion_txt"];
+                $prep=$_POST["precio_txt"];
+                $prev=$_POST["precioventa_txt"];
                 $estado=isset($_POST['estado'])?1:0;
                 $dir_subida = '../img/pro/';
                 $nombre="img_pro_".$id.".png";
@@ -58,7 +60,7 @@ include '../login/tiempo.php';
                 unlink($fichero_subido);
                 move_uploaded_file($_FILES['img']['tmp_name'], $fichero_subido);
                 }
-                $consulta="update productos set nombre='".$ti."',descripcion='".$des."',estado='".$estado."' where id=".$id;
+                $consulta="update productos set nombre='".$ti."',descripcion='".$des."',estado='".$estado."',precio_n=".$prep.",precio_v=".$prev." where id=".$id;
 		if(mysql_query($consulta,$conexion)){
                     ?>
         <script>
@@ -110,6 +112,24 @@ include '../login/tiempo.php';
                 </div>
             </div>
         <div style="padding: 1% 30% 1% 30%;">
+                <label> Precio de produccion</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="precio_txt" value="<?=$_POST['precioprep']?>"  maxlength="12"  type="text" data-validate-func="pattern" data-validate-arg="^\d+(\.\d{1,2})?$" placeholder="Precio de produccion" data-validate-hint="Llene el campo del precio(solo decimales)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
+                <label> Precio de venta</label>
+                <br>
+                <div style="width: 100%;" class="input-control text" data-role="input" >
+                    <input name="precioventa_txt" value="<?=$_POST['precioventa']?>"  maxlength="12"  type="text" data-validate-func="pattern" data-validate-arg="^\d+(\.\d{1,2})?$" placeholder="Precio de venta" data-validate-hint="Llene el campo del precio(solo decimales)">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
+        <div style="padding: 1% 30% 1% 30%;">
                 <label> Estado:</label>
                 <br>
                 <label class="switch" style="padding: 3px;">
@@ -144,8 +164,10 @@ include '../login/tiempo.php';
     <table class="dataTable border bordered hovered" data-role="datatable" data-searching="true">
                 <thead>
                 <tr>
-                    <th>Titulo</th>
+                    <th>Nombre</th>
                     <th>Descripcion</th>
+                    <th>$ Produccion</th>
+                    <th>$ Venta</th>
                     <th>Estado</th>
                     <th>Imagen</th>
                     <th>Modificar</th>
@@ -167,8 +189,10 @@ include '../login/tiempo.php';
                     <input type="hidden" name="codigo" value="<?=$row[0]?>" readonly="">
                     <td><?=$row[1]?><input name="titulo" type="hidden" value="<?=$row[1]?>"></td>
                     <td><?=$row[2]?><input name="descripcion" type="hidden" value="<?=$row[2]?>"></td>
-                    <td style="width: 10%;"><?php if($row[4]==1){echo "Activo";}else{echo "Inactivo";} ?><input name="estado" type="hidden" value="<?=$row[4]?>"></td>
-                    <td style="width: 20%;"><img src="<?=$row[3]?>"><input name="imagen" type="hidden" value="<?=$row[3]?>"></td>
+                    <td><?=$row[3]?><input name="precioprep" type="hidden" value="<?=$row[3]?>"></td>
+                    <td><?=$row[4]?><input name="precioventa" type="hidden" value="<?=$row[4]?>"></td>
+                    <td style="width: 10%;"><?php if($row[6]==1){echo "Activo";}else{echo "Inactivo";} ?><input name="estado" type="hidden" value="<?=$row[6]?>"></td>
+                    <td style="width: 20%;"><img src="<?=$row[5]?>"><input name="imagen" type="hidden" value="<?=$row[5]?>"></td>
                     <td><button name="modificarbtn" class="button icon mif-pencil bg-darkBlue fg-white"></button></td>
                 </form>
                 <form action="productosmanto.php" method="post">
@@ -183,8 +207,7 @@ include '../login/tiempo.php';
                 
                     <?php }} ?>
                 </tbody>
-            </table>
-                    <script>
+                <script>
                         function showDialog(id){
                             var dialog = $("#"+id).data('dialog');
                             if (!dialog.element.data('opened')) {
@@ -194,6 +217,8 @@ include '../login/tiempo.php';
                             }
                         }
                     </script>
+            </table>
+                    
         </div>
 </body>
 </html>

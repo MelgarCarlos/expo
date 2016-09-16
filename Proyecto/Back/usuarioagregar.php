@@ -64,7 +64,8 @@ include '../login/tiempo.php';
                 $mensaje="";
                 if(strcmp($usua, $password)){
                 if(strcmp($password, $password2)==0){
-                    $consulta="INSERT INTO usuario VALUES('".$usua."','".md5($password)."',".$valor.",1)";
+                    include '../login/encriptar.php';
+                    $consulta="INSERT INTO usuario VALUES('".$usua."','".  encriptar(md5($password))."',".$valor.",1)";
 		if(mysql_query($consulta,$conexion)){
                         $nombre=$_POST["nombre_txt"];
                         $apellido=$_POST["apellido_txt"];

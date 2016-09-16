@@ -22,7 +22,10 @@ include '../login/tiempo.php';
         <a class="fg-cobalt" href="usuarioagregar.php"><span class="mif-arrow-left mif-2x"></span> Regresar</a>
             <?php
             if(isset($_POST['eliminar_btn'])){
-                $consulta="delete from preguntas where id=('".$_POST['codigo']."')";
+                include '../login/conexion.php';
+                $consulta="delete from usuario_info where usuario=('".$_POST['usuario']."')";
+                mysql_query($consulta,$conexion);
+                $consulta="delete from usuario where usuario=('".$_POST['usuario']."')";
 		if(mysql_query($consulta,$conexion)){
                     ?>
         <script>
@@ -46,8 +49,11 @@ include '../login/tiempo.php';
             }
             ?>
         <?php if(isset($_POST['modificar_btn'])){
-                $consulta="update preguntas set pregunta=('".$_POST['pregunta_txt']."') where id='".$_POST['id_txt']."'";
+                include '../login/conexion.php';
+                $consulta="update usuario_info set nombre='".$_POST['nombre_txt']."',apellido='".$_POST['apellido_txt']."',correo='".$_POST['email_txt']."' where usuario='".$_POST['usuario_txt']."'";
 		if(mysql_query($consulta,$conexion)){
+                    $consulta="update usuario set estado=".$_POST['estado_txt']." where usuario='".$_POST['usuario_txt']."'";
+                    if(mysql_query($consulta,$conexion)){
                     ?>
         <script>
             $(document).ready(function() {
@@ -57,7 +63,18 @@ include '../login/tiempo.php';
             });
         </script>
         <?php
-                } else{ ?>
+                    } else{ ?>
+                    <script>
+            $(document).ready(function() {
+                setTimeout(function(){
+                    $.Notify({keepOpen: true, type: 'alert', caption: 'Mensaje', content: "Error al modificar"});
+                }, 150);
+            });
+    </script>
+                    <?php
+                    }
+                    
+                    } else{ ?>
                     <script>
             $(document).ready(function() {
                 setTimeout(function(){
@@ -69,12 +86,21 @@ include '../login/tiempo.php';
         } }
             ?>
             <?php if(isset($_POST['modificarbtn'])){ ?>
-        <form action="usuarioagregar.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+    <form action="usuariomanto.php" method="post" data-role="validator" data-show-required-state="false" data-hint-mode="line" data-hint-background="bg-red" data-hint-color="fg-white" data-hide-error="5000">
+            <div style="padding: 1% 30% 1% 30%;">
+                <label> Usuario</label>
+                <br>
+                <div style="width: 100%;" maxlength="40" autocomplete="off" class="input-control text" data-role="input" >
+                    <input name="usuario_txt" value="<?=$_POST['usuario']?>" readonly="" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" autocomplete="off">
+                    <span class="input-state-error mif-warning"></span>
+                    <span class="input-state-success mif-checkmark"></span>
+                </div>
+            </div>
             <div style="padding: 1% 30% 1% 30%;">
                 <label> Nombre</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="nombre_txt" autocomplete="off" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
+                    <input name="nombre_txt" value="<?=$_POST['nombre']?>" autocomplete="off" maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Nombre" data-validate-hint="Llene el campo nombre (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -83,16 +109,7 @@ include '../login/tiempo.php';
                 <label> Apellido</label>
                 <br>
                 <div style="width: 100%;" class="input-control text" data-role="input" >
-                    <input name="apellido_txt" autocomplete="off"  maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
-                    <span class="input-state-error mif-warning"></span>
-                    <span class="input-state-success mif-checkmark"></span>
-                </div>
-            </div>
-            <div style="padding: 1% 30% 1% 30%;">
-                <label> Usuario</label>
-                <br>
-                <div style="width: 100%;" maxlength="40" autocomplete="off" class="input-control text" data-role="input" >
-                    <input name="usuario_txt" type="text" data-validate-func="pattern" data-validate-arg="^([A-Za-z0-9])+$" placeholder="Usuario" data-validate-hint="Llene el campo usuario" autocomplete="off">
+                    <input name="apellido_txt" value="<?=$_POST['apellido']?>" autocomplete="off"  maxlength="100" type="text" data-validate-func="pattern" data-validate-arg="^([a-zA-Z ])+$" placeholder="Apellido" data-validate-hint="Llene el campo apellido (Solo letras)">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
@@ -101,29 +118,27 @@ include '../login/tiempo.php';
                 <label> Email</label>
                 <br>
                 <div  style="width: 100%;" class="input-control text" data-role="input">
-                    <input name="email_txt" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido"  autocomplete="off">
+                    <input name="email_txt" value="<?=$_POST['email']?>" maxlength="100" type="text" data-validate-func="email" placeholder="Su email" data-validate-hint="Llene el campo con un email valido"  autocomplete="off">
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
             </div>
             <div style="padding: 1% 30% 1% 30%;">
-                <label> Tipo</label>
+                <label> Estado</label>
                 <br>
                 <div class="input-control select" style="width:100%;">
-                    <select  name="tipo_sl" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
+                    <select  name="estado_txt" style="padding-left: 30px;" data-validate-func="required" data-validate-hint="Seleccione una opcion">
                         <option value="">Seleccione una opción</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Empleado">Empleado</option>
-                        <option value="Cliente">Cliente</option>
+                        <option value="1" <?php if($_POST['estado']==1){echo "selected";} ?>>Activo</option>
+                        <option value="0" <?php if($_POST['estado']==0){echo "selected";} ?>>Inactivo</option>
                     </select>
                     <span class="mif-arrow-down prepend-icon"></span>
                     <span class="input-state-error mif-warning"></span>
                     <span class="input-state-success mif-checkmark"></span>
                 </div>
             </div>
-            
             <div style="padding: 1% 30% 1% 30%;">
-                <button name="enviar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
+                <button name="modificar_btn" class="button success block-shadow-success text-shadow"> Guardar</button>
             </div>
         </form>
         <?php } ?>
@@ -139,6 +154,8 @@ include '../login/tiempo.php';
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Email</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -146,36 +163,55 @@ include '../login/tiempo.php';
                 <tbody>
                     <?php 
                             include '../login/conexion.php'; 
-                            $sql="select * from usuario_info";
+                            $sql="SELECT u.usuario,ui.nombre,ui.apellido,ui.correo,u.tipo,u.estado from usuario u,usuario_info ui where u.usuario=ui.usuario";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {
                             while($row=mysql_fetch_array($consulta)){
+                                if(strcmp($row[0],"admin")!=0){
                             ?>
-                
                 <tr>
                 <form action="usuariomanto.php" method="post">
-                    <td><?=$row[0]?><input name="codigo" type="hidden" value="<?=$row[0]?>"></td>
+                    <td><?=$row[0]?><input name="usuario" type="hidden" value="<?=$row[0]?>"></td>
                     <td><?=$row[1]?><input name="nombre" type="hidden" value="<?=$row[1]?>"></td>
                     <td><?=$row[2]?><input name="apellido" type="hidden" value="<?=$row[2]?>"></td>
                     <td><?=$row[3]?><input name="email" type="hidden" value="<?=$row[3]?>"></td>
+                    <td>
+                    <?php if($row[4]==1){
+                        echo "Administrador";
+                    }else if($row[4]==2){
+                        echo "Empleado";
+                    }else if($row[4]==3){
+                        echo "Cliente";
+                    } 
+                    ?>
+                    </td>
+                    <td>
+                    <?php if($row[5]==1){
+                        echo "Activo";
+                    }else{
+                        echo "Inactivo";
+                    }
+                    ?>
+                        <input name="estado" type="hidden" value="<?=$row[5]?>">
+                    </td>
                     <td><button name="modificarbtn" class="button icon mif-pencil bg-darkBlue fg-white"></button></td>
                 </form>
-                <form action="usuariomanto.php" method="post">
+                
                     <td><span class="button icon mif-cancel bg-red fg-white" onclick="showDialog('eliminar_form')"></span></td>
-                    <input name="codigo" type="hidden" value="<?=$row[0]?>">
-                    
                     <div data-role="dialog" id="eliminar_form" data-hide="2000" class="padding20" data-close-button="true">
+                        <form action="usuariomanto.php" method="post">
+                        <input name="usuario" type="hidden" value="<?=$row[0]?>">
                         <h3>¿Esta seguro que desea eliminar?</h3>
                         <button name="eliminar_btn" class="button alert">Si</button>
+                        </form>
                     </div>
-                </form>
+                
                 </tr>
                 
-                    <?php }} ?>
+                                <?php }}} ?>
                 </tbody>
-            </table>
-    <script>
+                <script>
                         function showDialog(id){
                             var dialog = $("#"+id).data('dialog');
                             if (!dialog.element.data('opened')) {
@@ -185,6 +221,8 @@ include '../login/tiempo.php';
                             }
                         }
                     </script>
+            </table>
+    
         </div>
 </body>
 </html>
