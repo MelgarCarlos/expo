@@ -164,7 +164,7 @@ include '../login/tiempo.php';
     <table class="dataTable border bordered hovered" data-role="datatable" data-searching="true">
                 <thead>
                 <tr>
-                    <th>Titulo</th>
+                    <th>Nombre</th>
                     <th>Descripcion</th>
                     <th>$ Produccion</th>
                     <th>$ Venta</th>

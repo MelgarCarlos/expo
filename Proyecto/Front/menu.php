@@ -1,4 +1,5 @@
-    <div class="app-bar bg-darkCyan fixed-top" data-role="appbar" style="padding-right: 12%;;">
+    <?php include '../login/conexion.php';?>
+<div class="app-bar bg-darkCyan fixed-top" data-role="appbar" style="padding-right: 12%;;">
         <div class="app-bar-element">Trazos Digitales</div>
         <div class="app-bar-divider"></div>
         
@@ -22,15 +23,32 @@
             ?>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="quienes.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-list2"></span>¿Qué Ofrecemos?</a></li>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="promocion.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-dollars"></span>Promociones</a></li>
-            <li style="padding-right: 5px;padding-left: 5px;"><a href="mision_vision.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-cog"></span>Misión y Visión</a></li>
             <?php
             if(verificar_usuario()){
                 if($_SESSION['tipo']==3){ 
                     ?>
-            <li style="padding-right: 5px;padding-left: 5px;"><a href="../Back/admin.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-cart"></span>Carrito de compra</a></li>
-            <?php
+            <li style="padding-right: 5px;padding-left: 5px;"><a href="usuariocontra.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-user"></span>Perfil</a></li>
+            <div class="app-bar-element">
+                <a class="dropdown-toggle fg-white"><span class="mif-cart"></span> Carrito de compra</a>
+                <div class="app-bar-drop-container bg-white fg-dark place-right" data-role="dropdown" data-no-close="true">
+                    <div class="padding20">
+                        <h4>Total a pagar: </h4>
+                        <?php
+                        $sql2="SELECT `total` FROM `pedido` WHERE `usuario`='".$_SESSION['user']."' and estado=1";
+                        $consult=mysql_query($sql2,$conexion) or die ("error ".mysql_error());
+                        $row=mysql_fetch_array($consult);
+                        $total_pagar=number_format($row[0], 2, '.', '');
+                        ?>
+                        <p class="fg-green">$<?=number_format($row[0], 2, '.', '');?></p>
+                        <a href="detalle.php" class="button bg-darkOrange fg-white"><span class="icon mif-cart"></span> Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            
+                        <?php
                 }else if(($_SESSION['tipo']==2)||($_SESSION['tipo']==1)){
             ?>
+            <li style="padding-right: 5px;padding-left: 5px;"><a href="mision_vision.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-cog"></span>Misión y Visión</a></li>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="../Back/admin.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-stack"></span>Administracion</a></li>
             <?php
             }
@@ -39,6 +57,7 @@
             <?php
             if(!verificar_usuario()){
             ?>
+            <li style="padding-right: 5px;padding-left: 5px;"><a href="mision_vision.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-cog"></span>Misión y Visión</a></li>
             <li style="padding-right: 5px;padding-left: 5px;"><a href="login.php"><span style="padding-bottom: 5px;padding-right: 4px;" class="mif-user"></span>Iniciar sesión</a></li>
             <?php
             }
