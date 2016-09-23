@@ -1,10 +1,10 @@
 <?php
 require('fpdf.php');
-//include '../login/login.php';
-//session_start();
-//if(!verificar_usuario()){
-//    header("location: ../Front/login.php");
-//}
+include '../login/login.php';
+session_start();
+if(!verificar_usuario()){
+    header("location: ../Front/login.php");
+}
 class PDF extends FPDF
 {
 // Cabecera de página
