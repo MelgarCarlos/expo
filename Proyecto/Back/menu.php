@@ -46,7 +46,11 @@
     <li class="stick bg-indigo">
         <a class="dropdown-toggle" href="#"><span class="mif-barcode icon fg-indigo"></span> Estadisticas</a>
         <ul class="d-menu" data-role="dropdown">
-            <li><a href="estadisticasventas.php"> Estadisticas ventas</a></li>
+            <li><a href="estadisticas_venta.php"> Estadisticas ventas</a></li>
+            <li><a href="estadisticas_productos_v.php"> Estadisticas de ventas segun producto</a></li>
+            <li><a href="estadisticas_venta_u.php"> Estadisticas ventas de usuarios</a></li>
+            <li><a href="estadisticas_usuario.php"> Estadisticas de usuarios</a></li>
+            <li><a href="estadisticas_productos_g.php"> Estadisticas de ganancia segun precios de producto</a></li>
         </ul>
     </li>
     <li class="stick bg-darkRed">
