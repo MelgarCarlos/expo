@@ -1,4 +1,4 @@
-<ul class="sidebar2" style="height: 850px;padding-left: 10px;">
+<ul class="sidebar2" style="height: 900px;padding-left: 10px;">
     <li class="title" style="line-height: 28px;text-align: center;">Panel administrativo</li>
     <hr>
     <li class="stick bg-blue"><a href="admin.php"><span class="mif-home icon fg-blue" ></span> Inicio</a></li>
@@ -41,6 +41,12 @@
         <ul class="d-menu" data-role="dropdown">
             <li><a href="promocionesagregar.php"><span class="mif-dollars icon fg-black" ></span> Promociones</a></li>
             <li><a href="promocionesmanto.php"><span class="mif-pencil icon fg-black" ></span> Mantenimiento</a></li>
+        </ul>
+    </li>
+    <li class="stick bg-indigo">
+        <a class="dropdown-toggle" href="#"><span class="mif-barcode icon fg-indigo"></span> Estadisticas</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="estadisticasventas.php"> Estadisticas ventas</a></li>
         </ul>
     </li>
     <li class="stick bg-darkRed">
