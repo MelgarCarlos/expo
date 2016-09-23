@@ -68,7 +68,7 @@ function Header()
     $this->SetFont('Arial','',16);
     // Movernos a la derecha
     // Título
-    $this->Cell(0,20,'Servicios ofertados',0,0,'C');//titulo documento
+    $this->Cell(0,20,'Ganancia de productos mas vendidos',0,0,'C');//titulo documento
     
     
     
@@ -93,21 +93,18 @@ $pdf = new PDF();
 $pdf->AddPage('P','letter',0);
 $pdf->SetFont('Arial','B',8);
 $pdf->Ln(10);
-$pdf->Cell(20,10,utf8_decode('Id'),1,0);
-$pdf->Cell(60,10,utf8_decode('Titulo'),1,0);
-$pdf->Cell(120,10,utf8_decode('Descripcion'),1,0);
+$pdf->Cell(120,10,utf8_decode('Nombre'),1,0);
+$pdf->Cell(80,10,utf8_decode('Ganancia'),1,0);
 $pdf->Ln(10);
 $pdf->SetFont('Arial','',8);
 include '../login/conexion.php'; 
-                            $sql="SELECT `id`, `titulo`, `descripcion` FROM `servicios` WHERE 1";
+                            $sql="select (productos.precio_v-productos.precio_n) as ganancia,SUM(detalle_pedido.cantidad)as cantidad,productos.nombre from detalle_pedido, productos where detalle_pedido.producto=productos.id GROUP BY detalle_pedido.producto";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {
                             while($row=mysql_fetch_array($consulta)){
-                                $pdf->Cell(20,10,utf8_decode($row[0]),1,0);
-                                $pdf->Cell(60,10,substr(utf8_decode($row[1]),0,30),1,0);
-                                $pdf->Cell(120,10,substr(utf8_decode($row[2]),0,70),1,1);
-                                
+                                $pdf->Cell(120,10,utf8_decode($row[2]),1,0);
+                                $pdf->Cell(80,10,  number_format(($row[0]*$row[1]),2,'.',''),1,1);
                             }}
 $pdf->Output();
 ?>

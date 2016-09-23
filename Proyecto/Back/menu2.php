@@ -53,6 +53,17 @@
             <li><a href="estadisticas_productos_g.php"> Estadisticas de ganancia segun precios de producto</a></li>
         </ul>
     </li>
+    <li class="stick bg-lightGray">
+        <a class="dropdown-toggle" href="#"><span class="mif-clipboard icon fg-lightGray"></span> Reportes</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="../fpdf/productos.php" target="_blank"> Reporte de productos ofertados</a></li>
+            <li><a href="../fpdf/servicios.php" target="_blank"> Reporte de servicios ofertados</a></li>
+            <li><a href="../fpdf/pedido.php" target="_blank"> Reporte de pedidos pendientes de pago</a></li>
+            <li><a href="../fpdf/ventas_g_p.php" target="_blank"> Reporte de ganancia de productos vendidos</a></li>
+            <li><a href="../fpdf/promocion.php" target="_blank">Reporte de promociones disponibles </a></li>
+            <li><a href="../fpdf/preguntas.php" target="_blank">Reporte de preguntas de seguridad</a></li>
+        </ul>
+    </li>
     <li class="stick bg-darkRed">
         <a class="dropdown-toggle" href="#"><span class="mif-images icon fg-darkRed"></span> Editor Slider</a>
         <ul class="d-menu" data-role="dropdown">

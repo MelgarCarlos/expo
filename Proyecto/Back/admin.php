@@ -21,7 +21,7 @@ include '../login/tiempo.php';
        ?>
         <div class="bg-grayLighter" style="margin: 0px;">
                     <center>
-                        <h3 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-wrench" ></span> Parte administrativa</h3>
+                        <h3 class="bg-teal fg-white padding10" style="margin-bottom: 0px;text-shadow: 0px 0px 4px rgba(150, 150, 150, 1);"><span style="padding-bottom: 5px;" class="mif-wrench" ></span> Parte administrativa - Bienvenido <?=$_SESSION['user']?></h3>
                     </center>
         </div>
         <div style="padding: 20px;">

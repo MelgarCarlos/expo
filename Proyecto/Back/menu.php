@@ -1,4 +1,4 @@
-<ul class="sidebar2" style="height: 900px;padding-left: 10px;">
+<ul class="sidebar2" style="height: 1200px;padding-left: 10px;">
     <li class="title" style="line-height: 28px;text-align: center;">Panel administrativo</li>
     <hr>
     <li class="stick bg-blue"><a href="admin.php"><span class="mif-home icon fg-blue" ></span> Inicio</a></li>
@@ -57,10 +57,11 @@
         <a class="dropdown-toggle" href="#"><span class="mif-clipboard icon fg-lightGray"></span> Reportes</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="../fpdf/productos.php" target="_blank"> Reporte de productos ofertados</a></li>
-            <li><a href="../fpdf/servicios.php"> Reporte de servicios ofertados</a></li>
-            <li><a href=""> </a></li>
-            <li><a href=""> </a></li>
-            <li><a href=""> </a></li>
+            <li><a href="../fpdf/servicios.php" target="_blank"> Reporte de servicios ofertados</a></li>
+            <li><a href="../fpdf/pedido.php" target="_blank"> Reporte de pedidos pendientes de pago</a></li>
+            <li><a href="../fpdf/ventas_g_p.php" target="_blank"> Reporte de ganancia de productos vendidos</a></li>
+            <li><a href="../fpdf/promocion.php" target="_blank">Reporte de promociones disponibles </a></li>
+            <li><a href="../fpdf/preguntas.php" target="_blank">Reporte de preguntas de seguridad</a></li>
         </ul>
     </li>
     <li class="stick bg-darkRed">
