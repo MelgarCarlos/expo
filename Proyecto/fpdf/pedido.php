@@ -1,10 +1,10 @@
 <?php
 require('fpdf.php');
-include '../login/login.php';
-session_start();
-if(!verificar_usuario()){
-    header("location: ../Front/login.php");
-}
+//include '../login/login.php';
+//session_start();
+//if(!verificar_usuario()){
+//    header("location: ../Front/login.php");
+//}
 class PDF extends FPDF
 {
 // Cabecera de página
@@ -62,13 +62,12 @@ function Header()
     // Título
     $this->Cell(0,20,'Usuario: '.$_SESSION['user'],0,0);
     // Salto de línea
-    // Salto de línea
     $this->Ln(20);
     // Arial bold 16
     $this->SetFont('Arial','',16);
     // Movernos a la derecha
     // Título
-    $this->Cell(0,20,'Servicios ofertados',0,0,'C');//titulo documento
+    $this->Cell(0,20,'Pedidos pendientes',0,0,'C');//titulo documento
     
     
     
@@ -94,19 +93,21 @@ $pdf->AddPage('P','letter',0);
 $pdf->SetFont('Arial','B',8);
 $pdf->Ln(10);
 $pdf->Cell(20,10,utf8_decode('Id'),1,0);
-$pdf->Cell(60,10,utf8_decode('Titulo'),1,0);
-$pdf->Cell(120,10,utf8_decode('Descripcion'),1,0);
+$pdf->Cell(80,10,utf8_decode('Fecha'),1,0);
+$pdf->Cell(60,10,utf8_decode('Usuario'),1,0);
+$pdf->Cell(40,10,utf8_decode('Total'),1,0);
 $pdf->Ln(10);
 $pdf->SetFont('Arial','',8);
 include '../login/conexion.php'; 
-                            $sql="SELECT `id`, `titulo`, `descripcion` FROM `servicios` WHERE 1";
+                            $sql="SELECT `id`, `fecha`,  `usuario`,`total` FROM `pedido` WHERE estado=2";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {
                             while($row=mysql_fetch_array($consulta)){
                                 $pdf->Cell(20,10,utf8_decode($row[0]),1,0);
-                                $pdf->Cell(60,10,substr(utf8_decode($row[1]),0,30),1,0);
-                                $pdf->Cell(120,10,substr(utf8_decode($row[2]),0,70),1,1);
+                                $pdf->Cell(80,10,substr(utf8_decode($row[1]),0,30),1,0);
+                                $pdf->Cell(60,10,substr(utf8_decode($row[2]),0,70),1,0);
+                                $pdf->Cell(40,10,  number_format($row[3],2,'.',''),1,1);
                                 
                             }}
 $pdf->Output();
