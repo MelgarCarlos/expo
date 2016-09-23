@@ -60,7 +60,7 @@ include '../login/tiempo.php';
     
                             <?php }} ?>
                                     // Set chart options
-        var options = {'title':'Productos que producen mayor ganancia segun su precio de produccion y precio de venta',
+        var options = {'title':'Productos que producen mayor ganancia segun la cantidad que se han vendido',
                        'width':800,
                        'height':300};
 
