@@ -60,7 +60,7 @@ include '../login/tiempo.php';
     
                             <?php }} ?>
                                     // Set chart options
-        var options = {'title':'Usuarios en el sistema',
+        var options = {'title':'Usuarios en el sistema segun su tipo',
                        'width':800,
                        'height':300};
 
