@@ -13,6 +13,12 @@
         </ul>
     </li>
     <?php } ?>
+    <li class="stick bg-brown">
+        <a class="dropdown-toggle" href="#"><span class="mif-list2 icon fg-brown"></span> Pedidos pendientes</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="pedidosmanto.php"><span class="mif-list2 icon fg-black" ></span> Pedidos pendientes</a></li>
+       </ul>
+    </li>
     <?php if($_SESSION['tipo']==2){ ?>
     <li class="stick bg-orange">
         <a class="dropdown-toggle" href="#"><span class="mif-users icon fg-orange"></span> Usuario</a>
