@@ -126,6 +126,7 @@ if(verificar_usuario()){
         <?php if(isset($cont)&&$cont>0){?>
         <form action="detalle.php" method="post">
             <button class="button bg-green fg-white" name="compra_btn">Enviar pedido <span class="icon mif-mail mif-2x mif-ani-pass mif-ani-hover-shake"></span></button>
+            <a href="../fpdf/pedido_compra.php" target="_blank" class="button bg-darkBlue fg-white">Generar pedido de compra (Facturacion)</a>
         </form>
             <?php  
         }

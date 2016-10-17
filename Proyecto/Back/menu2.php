@@ -1,4 +1,4 @@
-<ul class="sidebar2" style="height: 1200px;padding-left: 10px;">
+<ul class="sidebar2" style="height: 1400px;padding-left: 10px;">
     <li class="title" style="line-height: 28px;text-align: center;">Panel administrativo</li>
     <hr>
     <li class="stick bg-blue"><a href="admin.php"><span class="mif-home icon fg-blue" ></span> Inicio</a></li>
@@ -13,6 +13,12 @@
         </ul>
     </li>
     <?php } ?>
+    <li class="stick bg-brown">
+        <a class="dropdown-toggle" href="#"><span class="mif-list2 icon fg-brown"></span> Pedidos pendientes</a>
+        <ul class="d-menu" data-role="dropdown">
+            <li><a href="pedidosmanto.php"><span class="mif-list2 icon fg-black" ></span> Pedidos pendientes</a></li>
+       </ul>
+    </li>
     <?php if($_SESSION['tipo']==2){ ?>
     <li class="stick bg-orange">
         <a class="dropdown-toggle" href="#"><span class="mif-users icon fg-orange"></span> Usuario</a>
@@ -56,6 +62,11 @@
     <li class="stick bg-lightGray">
         <a class="dropdown-toggle" href="#"><span class="mif-clipboard icon fg-lightGray"></span> Reportes</a>
         <ul class="d-menu" data-role="dropdown">
+            <li><a href="../fpdf/clientes_frecuentes.php" target="_blank"> Cliente frecuente</a></li>
+            <li><a href="../fpdf/productos_ingresos.php" target="_blank"> Mayores ingresos por productos</a></li>
+            <li><a href="../fpdf/productos_menos_ingresos.php" target="_blank"> Menores ingresos por productos</a></li>
+            <li><a href="../fpdf/productos_mas_vendidos.php" target="_blank"> Productos mas vendidos</a></li>
+            <li><a href="../fpdf/productos_menos_vendidos.php" target="_blank"> Producto menos vendidos</a></li>
             <li><a href="../fpdf/productos.php" target="_blank"> Reporte de productos ofertados</a></li>
             <li><a href="../fpdf/servicios.php" target="_blank"> Reporte de servicios ofertados</a></li>
             <li><a href="../fpdf/pedido.php" target="_blank"> Reporte de pedidos pendientes de pago</a></li>

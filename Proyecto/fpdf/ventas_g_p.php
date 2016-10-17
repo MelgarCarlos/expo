@@ -98,7 +98,7 @@ $pdf->Cell(80,10,utf8_decode('Ganancia'),1,0);
 $pdf->Ln(10);
 $pdf->SetFont('Arial','',8);
 include '../login/conexion.php'; 
-                            $sql="select (productos.precio_v-productos.precio_n) as ganancia,SUM(detalle_pedido.cantidad)as cantidad,productos.nombre from detalle_pedido, productos where detalle_pedido.producto=productos.id GROUP BY detalle_pedido.producto";
+                            $sql="select (productos.precio_v-productos.precio_n) as ganancia,SUM(detalle_pedido.cantidad)as cantidad,productos.nombre from detalle_pedido, productos where detalle_pedido.producto=productos.id GROUP BY detalle_pedido.producto order by ganancia desc";
                             $consulta=mysql_query($sql,$conexion) or die ("error ".mysql_error());
                             $numRegistros=mysql_num_rows($consulta);
                             if($numRegistros>0) {
